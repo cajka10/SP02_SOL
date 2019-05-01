@@ -186,6 +186,15 @@
     <ClInclude Include="Kraj.h">
       <Filter>Header Files</Filter>
     </ClInclude>
+    <ClInclude Include="Kriterium.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="KriteriumNazov.h">
+      <Filter>Header Files\structures</Filter>
+    </ClInclude>
+    <ClInclude Include="Oblast.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="structures\graph\forward_star_graph.cpp">
@@ -225,6 +234,9 @@
       <Filter>Source Files</Filter>
     </ClCompile>
     <ClCompile Include="Dedina.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="Kraj.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
   </ItemGroup>
