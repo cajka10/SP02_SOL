@@ -1,6 +1,7 @@
 #pragma once
 #include "structures/table/sorted_sequence_table.h"
 #include "Dedina.h"
+#include "structures/table/unsorted_sequence_table.h"
 
 class Volby
 {

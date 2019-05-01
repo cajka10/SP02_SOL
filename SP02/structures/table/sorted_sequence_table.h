@@ -98,38 +98,38 @@ namespace structures
 	template<typename K, typename T>
 	inline int SortedSequenceTable<K, T>::indexOfKey(const K & key, int indexStart, int indexEnd, bool & found) const
 	{
-		int index = static_cast<int>(size());
-		int center = (indexStart + indexEnd) / 2;
-		K centerKey = (*list_)[center]->getKey();
+		int indexSize = static_cast<int>(size());
 
-		if (indexStart == index)
+		if (indexStart == indexSize)
 		{
 			found = false;
-			return index;
+			return indexSize;
 		}
 
+		int pivot = (indexStart + indexEnd) / 2;
+		K keyAtPivot = (*list_)[pivot]->getKey();
 
-		if (centerKey == key)
+		if (keyAtPivot == key)
 		{
 			found = true;
-			return center;
+			return pivot;
 		}
 		else
 		{
 			if (indexStart == indexEnd)
 			{
 				found = false;
-				return key < centerKey ? center : center + 1;
+				return key < keyAtPivot ? pivot : pivot + 1;
 			}
 			else
 			{
-				if (centerKey < key)
+				if (keyAtPivot < key)
 				{
-					indexStart = center + 1;
+					indexStart = pivot + 1;
 				}
 				else
 				{
-					indexEnd = center;
+					indexEnd = pivot;
 				}
 				return indexOfKey(key, indexStart, indexEnd, found);
 			}

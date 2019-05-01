@@ -183,6 +183,9 @@
     <ClInclude Include="Volby.h">
       <Filter>Header Files</Filter>
     </ClInclude>
+    <ClInclude Include="Kraj.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="structures\graph\forward_star_graph.cpp">
