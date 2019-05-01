@@ -6,82 +6,134 @@ class Oblast
 private:
 	std::string nazov_;
 	
-	int pocetZapVolicov_;
-	int pocetVydObalok_;
-	double ucastVolicovPercenta_;
-	int pocetOdovzdObalok_;
-	int pocetPlatHlasov_;
+	int pocetZapVolicov1_;
+	int pocetVydObalok1_;
+	double ucastVolicovPercenta1_;
+	int pocetOdovzdObalok1_;
+	int pocetPlatHlasov1_;
+
+	int pocetZapVolicov2_;
+	int pocetVydObalok2_;
+	double ucastVolicovPercenta2_;
+	int pocetOdovzdObalok2_;
+	int pocetPlatHlasov2_;
 
 public:
 
-	Oblast(std::string nazov, int pocet_zap_volicov, int pocet_vyd_obalok, double ucast_volicov_percenta,
-		int pocet_odovzd_obalok, int pocet_plat_hlasov)
-		: nazov_(nazov),
-		  pocetZapVolicov_(pocet_zap_volicov),
-		  pocetVydObalok_(pocet_vyd_obalok),
-		  ucastVolicovPercenta_(ucast_volicov_percenta),
-		  pocetOdovzdObalok_(pocet_odovzd_obalok),
-		  pocetPlatHlasov_(pocet_plat_hlasov)
+	Oblast(std::string nazov)
+		: nazov_(nazov)
+		  
 	{
 	}
+
 
 	std::string get_nazov() const
 	{
 		return nazov_;
 	}
 
-	void set_nazov_kraja(const std::string& nazov_kraja)
+	void set_nazov(const std::string& nazov)
 	{
-		nazov_ = nazov_kraja;
+		nazov_ = nazov;
 	}
 
-	int get_pocet_zap_volicov() const
+	int get_pocet_zap_volicov1() const
 	{
-		return pocetZapVolicov_;
+		return pocetZapVolicov1_;
 	}
 
-	void set_pocet_zap_volicov(int pocet_zap_volicov)
+	void set_pocet_zap_volicov1(int pocet_zap_volicov1)
 	{
-		pocetZapVolicov_ = pocet_zap_volicov;
+		pocetZapVolicov1_ = pocet_zap_volicov1;
 	}
 
-	int get_pocet_vyd_obalok() const
+	int get_pocet_vyd_obalok1() const
 	{
-		return pocetVydObalok_;
+		return pocetVydObalok1_;
 	}
 
-	void set_pocet_vyd_obalok(int pocet_vyd_obalok)
+	void set_pocet_vyd_obalok1(int pocet_vyd_obalok1)
 	{
-		pocetVydObalok_ = pocet_vyd_obalok;
+		pocetVydObalok1_ = pocet_vyd_obalok1;
 	}
 
-	double get_ucast_volicov_percenta() const
+	double get_ucast_volicov_percenta1() const
 	{
-		return ucastVolicovPercenta_;
+		return ucastVolicovPercenta1_;
 	}
 
-	void set_ucast_volicov_percenta(double ucast_volicov_percenta)
+	void set_ucast_volicov_percenta1(double ucast_volicov_percenta1)
 	{
-		ucastVolicovPercenta_ = ucast_volicov_percenta;
+		ucastVolicovPercenta1_ = ucast_volicov_percenta1;
 	}
 
-	int get_pocet_odovzd_obalok() const
+	int get_pocet_odovzd_obalok1() const
 	{
-		return pocetOdovzdObalok_;
+		return pocetOdovzdObalok1_;
 	}
 
-	void set_pocet_odovzd_obalok(int pocet_odovzd_obalok)
+	void set_pocet_odovzd_obalok1(int pocet_odovzd_obalok1)
 	{
-		pocetOdovzdObalok_ = pocet_odovzd_obalok;
+		pocetOdovzdObalok1_ = pocet_odovzd_obalok1;
 	}
 
-	int get_pocet_plat_hlasov() const
+	int get_pocet_plat_hlasov1() const
 	{
-		return pocetPlatHlasov_;
+		return pocetPlatHlasov1_;
 	}
 
-	void set_pocet_plat_hlasov(int pocet_plat_hlasov)
+	void set_pocet_plat_hlasov1(int pocet_plat_hlasov1)
 	{
-		pocetPlatHlasov_ = pocet_plat_hlasov;
+		pocetPlatHlasov1_ = pocet_plat_hlasov1;
+	}
+
+	int get_pocet_zap_volicov2() const
+	{
+		return pocetZapVolicov2_;
+	}
+
+	void set_pocet_zap_volicov2(int pocet_zap_volicov2)
+	{
+		pocetZapVolicov2_ = pocet_zap_volicov2;
+	}
+
+	int get_pocet_vyd_obalok2() const
+	{
+		return pocetVydObalok2_;
+	}
+
+	void set_pocet_vyd_obalok2(int pocet_vyd_obalok2)
+	{
+		pocetVydObalok2_ = pocet_vyd_obalok2;
+	}
+
+	double get_ucast_volicov_percenta2() const
+	{
+		return ucastVolicovPercenta2_;
+	}
+
+	void set_ucast_volicov_percenta2(double ucast_volicov_percenta2)
+	{
+		ucastVolicovPercenta2_ = ucast_volicov_percenta2;
+	}
+
+	int get_pocet_odovzd_obalok2() const
+	{
+		return pocetOdovzdObalok2_;
+	}
+
+	void set_pocet_odovzd_obalok2(int pocet_odovzd_obalok2)
+	{
+		pocetOdovzdObalok2_ = pocet_odovzd_obalok2;
+	}
+
+	int get_pocet_plat_hlasov2() const
+	{
+		return pocetPlatHlasov2_;
+	}
+
+	void set_pocet_plat_hlasov2(int pocet_plat_hlasov2)
+	{
+		pocetPlatHlasov2_ = pocet_plat_hlasov2;
 	}
 };

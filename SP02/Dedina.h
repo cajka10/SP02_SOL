@@ -1,10 +1,11 @@
 #pragma once
 #include <string>
+#include "Oblast.h"
 using namespace  std;
-class Dedina
+class Dedina : public Oblast
 {
 private:
-	string nazovDediny_;
+	/*string nazovDediny_;
 	int pocetZapVolicov1_;
 	int pocetVydObalok1_;
 	double ucastVolicovPercenta1_;
@@ -14,13 +15,12 @@ private:
 	int pocetVydObalok2_;
 	double ucastVolicovPercenta2_;
 	int pocetOdovzdObalok2_;
-	int pocetPlatHlasov2_;
+	int pocetPlatHlasov2_;*/
 public:
-	Dedina(string parNazov, int parPocetZapVolicov1, int parPocetVydObalok1, double parUcastVolicovPer1, int parPocetOdovzdObalok1, int parPocPlatHlasov1,
-		int parPocetZapVolicov2, int parPocetVydObalok2, double parUcastVolicovPer2, int parPocetOdovzdObalok2, int parPocPlatHlasov2);
+	Dedina(string nazov);
 	~Dedina();
 	 
-	string get_nazov_dediny() const
+	/*string get_nazov_dediny() const
 	{
 		return nazovDediny_;
 	}
@@ -78,5 +78,5 @@ public:
 	void set_pocet_plat_hlasov(int pocet_plat_hlasov)
 	{
 		pocetPlatHlasov1_ = pocet_plat_hlasov;
-	}
+	}*/
 };
