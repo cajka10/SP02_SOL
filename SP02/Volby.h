@@ -5,7 +5,7 @@
 class Volby
 {
 private:
-	structures::SortedSequenceTable<string, Dedina> tabDedin;
+	structures::SortedSequenceTable<string, Dedina*>* dediny_;
 public:
 	Volby();
 	~Volby();
