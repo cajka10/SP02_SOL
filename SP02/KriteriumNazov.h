@@ -5,8 +5,8 @@
 
 class KriteriumNazov : public Kriterium<std::string,Oblast> {
 public: 
-	std::string evaluate(const Oblast& a) override
+	std::string evaluate(const Oblast& oblast) override
 	{
-		return a.get_nazov();
+		return oblast.get_nazov();
 	}
 };

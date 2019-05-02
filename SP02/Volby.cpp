@@ -14,7 +14,6 @@ Volby::Volby()
 }
 void Volby::nacitajSubory()
 {
-	// nacitavam len prve kolo volieb
 
 	ifstream is("dediny.csv");
 
@@ -34,6 +33,7 @@ void Volby::nacitajSubory()
 	string ucast2;
 	string pocetOdovzObalok2;
 	string pocetPlatHlasov2;
+	string nazovOkresu;
 
 	while (is.good())
 	{
@@ -48,7 +48,8 @@ void Volby::nacitajSubory()
 		getline(is, pocetVydObalok2, ';');
 		getline(is, ucast2, ';');
 		getline(is, pocetOdovzObalok2, ';');
-		getline(is, pocetPlatHlasov2, '\n');
+		getline(is, pocetPlatHlasov2, ';');
+		getline(is, nazovOkresu, '\n');
 
 		Dedina* pomDedina = new Dedina(nazov);
 		pomDedina->set_pocet_zap_volicov1(stoi(pocetZapVolicov1));
@@ -62,6 +63,7 @@ void Volby::nacitajSubory()
 		pomDedina->set_ucast_volicov_percenta1(stod(ucast2));
 		pomDedina->set_pocet_odovzd_obalok1(stoi(pocetOdovzObalok2));
 		pomDedina->set_pocet_plat_hlasov1(stoi(pocetPlatHlasov2));
+		pomDedina->set_nazov_okresu(nazovOkresu);
 		dediny_->insert(nazov, pomDedina );
 		
 	}

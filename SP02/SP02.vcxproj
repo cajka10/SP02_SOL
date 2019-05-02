@@ -119,6 +119,7 @@
     <ClInclude Include="Dedina.h" />
     <ClInclude Include="Kraj.h" />
     <ClInclude Include="Kriterium.h" />
+    <ClInclude Include="KriteriumNachadzaSa.h" />
     <ClInclude Include="KriteriumNazov.h" />
     <ClInclude Include="Oblast.h" />
     <ClInclude Include="Okres.h" />
