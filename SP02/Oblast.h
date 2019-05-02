@@ -37,9 +37,18 @@ public:
 		nazov_ = nazov;
 	}
 
-	int get_pocet_zap_volicov1() const
+	int get_pocet_zap_volicov(int kolo) const
 	{
-		return pocetZapVolicov1_;
+		if (kolo == 1)
+		{
+			return pocetZapVolicov1_;
+
+		}
+		if (kolo == 2)
+		{
+			return pocetZapVolicov2_;
+
+		}
 	}
 
 	void set_pocet_zap_volicov1(int pocet_zap_volicov1)
@@ -47,9 +56,18 @@ public:
 		pocetZapVolicov1_ = pocet_zap_volicov1;
 	}
 
-	int get_pocet_vyd_obalok1() const
+	int get_pocet_vyd_obalok(int kolo) const
 	{
-		return pocetVydObalok1_;
+		if (kolo == 1)
+		{
+			return  pocetVydObalok1_;
+
+		}
+		if (kolo == 2)
+		{
+			return  pocetVydObalok2_;
+
+		}
 	}
 
 	void set_pocet_vyd_obalok1(int pocet_vyd_obalok1)
@@ -57,9 +75,19 @@ public:
 		pocetVydObalok1_ = pocet_vyd_obalok1;
 	}
 
-	double get_ucast_volicov_percenta1() const
+	double get_ucast_volicov_percenta1(int kolo) const
 	{
-		return ucastVolicovPercenta1_;
+		if (kolo == 1)
+		{
+			return ucastVolicovPercenta1_;
+
+		}
+		if (kolo == 2)
+		{
+			return ucastVolicovPercenta2_;
+
+		}
+
 	}
 
 	void set_ucast_volicov_percenta1(double ucast_volicov_percenta1)
@@ -67,9 +95,18 @@ public:
 		ucastVolicovPercenta1_ = ucast_volicov_percenta1;
 	}
 
-	int get_pocet_odovzd_obalok1() const
+	int get_pocet_odovzd_obalok1(int kolo) const
 	{
-		return pocetOdovzdObalok1_;
+		if (kolo == 1)
+		{
+			return pocetOdovzdObalok1_;
+
+		}
+		if (kolo == 2)
+		{
+			return pocetOdovzdObalok2_;
+
+		}
 	}
 
 	void set_pocet_odovzd_obalok1(int pocet_odovzd_obalok1)
@@ -77,9 +114,18 @@ public:
 		pocetOdovzdObalok1_ = pocet_odovzd_obalok1;
 	}
 
-	int get_pocet_plat_hlasov1() const
+	int get_pocet_plat_hlasov1(int kolo) const
 	{
-		return pocetPlatHlasov1_;
+		if (kolo == 1)
+		{
+			return pocetPlatHlasov1_;
+
+		}
+		if (kolo == 2)
+		{
+			return  pocetPlatHlasov2_;
+
+		}
 	}
 
 	void set_pocet_plat_hlasov1(int pocet_plat_hlasov1)
@@ -87,50 +133,33 @@ public:
 		pocetPlatHlasov1_ = pocet_plat_hlasov1;
 	}
 
-	int get_pocet_zap_volicov2() const
-	{
-		return pocetZapVolicov2_;
-	}
 
 	void set_pocet_zap_volicov2(int pocet_zap_volicov2)
 	{
 		pocetZapVolicov2_ = pocet_zap_volicov2;
 	}
 
-	int get_pocet_vyd_obalok2() const
-	{
-		return pocetVydObalok2_;
-	}
+
 
 	void set_pocet_vyd_obalok2(int pocet_vyd_obalok2)
 	{
 		pocetVydObalok2_ = pocet_vyd_obalok2;
 	}
 
-	double get_ucast_volicov_percenta2() const
-	{
-		return ucastVolicovPercenta2_;
-	}
+
 
 	void set_ucast_volicov_percenta2(double ucast_volicov_percenta2)
 	{
 		ucastVolicovPercenta2_ = ucast_volicov_percenta2;
 	}
 
-	int get_pocet_odovzd_obalok2() const
-	{
-		return pocetOdovzdObalok2_;
-	}
+	
 
 	void set_pocet_odovzd_obalok2(int pocet_odovzd_obalok2)
 	{
 		pocetOdovzdObalok2_ = pocet_odovzd_obalok2;
 	}
 
-	int get_pocet_plat_hlasov2() const
-	{
-		return pocetPlatHlasov2_;
-	}
 
 	void set_pocet_plat_hlasov2(int pocet_plat_hlasov2)
 	{

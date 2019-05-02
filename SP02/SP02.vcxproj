@@ -121,6 +121,7 @@
     <ClInclude Include="Kriterium.h" />
     <ClInclude Include="KriteriumNachadzaSa.h" />
     <ClInclude Include="KriteriumNazov.h" />
+    <ClInclude Include="KriteriumVolici.h" />
     <ClInclude Include="Oblast.h" />
     <ClInclude Include="Okres.h" />
     <ClInclude Include="structures\array\array.h" />
