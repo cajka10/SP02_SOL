@@ -63,10 +63,14 @@ public:
 			return  pocetVydObalok1_;
 
 		}
-		if (kolo == 2)
+		else if (kolo == 2)
 		{
 			return  pocetVydObalok2_;
 
+		}
+		else
+		{
+			return  pocetVydObalok1_ + pocetVydObalok2_;
 		}
 	}
 
@@ -75,14 +79,14 @@ public:
 		pocetVydObalok1_ = pocet_vyd_obalok1;
 	}
 
-	double get_ucast_volicov_percenta1(int kolo) const
+	double get_ucast_volicov_percenta(int kolo) const
 	{
 		if (kolo == 1)
 		{
 			return ucastVolicovPercenta1_;
 
 		}
-		if (kolo == 2)
+		else if (kolo == 2)
 		{
 			return ucastVolicovPercenta2_;
 
@@ -95,14 +99,14 @@ public:
 		ucastVolicovPercenta1_ = ucast_volicov_percenta1;
 	}
 
-	int get_pocet_odovzd_obalok1(int kolo) const
+	int get_pocet_odovzd_obalok(int kolo) const
 	{
 		if (kolo == 1)
 		{
 			return pocetOdovzdObalok1_;
 
 		}
-		if (kolo == 2)
+		else if (kolo == 2)
 		{
 			return pocetOdovzdObalok2_;
 

@@ -117,11 +117,16 @@
   </ItemDefinitionGroup>
   <ItemGroup>
     <ClInclude Include="Dedina.h" />
+    <ClInclude Include="Filter.h" />
+    <ClInclude Include="FilterFI.h" />
+    <ClInclude Include="Filter_fi.h" />
     <ClInclude Include="Kraj.h" />
     <ClInclude Include="Kriterium.h" />
     <ClInclude Include="KriteriumNachadzaSa.h" />
     <ClInclude Include="KriteriumNazov.h" />
+    <ClInclude Include="KriteriumUcast.h" />
     <ClInclude Include="KriteriumVolici.h" />
+    <ClInclude Include="KriteriumVydObalky.h" />
     <ClInclude Include="Oblast.h" />
     <ClInclude Include="Okres.h" />
     <ClInclude Include="structures\array\array.h" />
