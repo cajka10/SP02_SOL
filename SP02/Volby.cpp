@@ -2,14 +2,18 @@
 #include <fstream>
 #include <iostream>
 #include "structures/table/unsorted_sequence_table.h"
+#include <experimental/filesystem>
+#include "Filter_fi.h"
+#include "KriteriumNazov.h"
 
 
 Volby::Volby()
 {
-	this->dediny_ = new structures::SortedSequenceTable<string, Dedina*>();
+	this->dediny_ = new structures::SortedSequenceTable<string, Oblast*>();
 	this->kraje_ = new structures::SortedSequenceTable<string, Kraj*>();
 	this->okresy_ = new structures::SortedSequenceTable<string, Okres*>();
-	nacitajSubory();
+	vypisMenu();
+	//nacitajSubory();
 	std::cout << "ouuuuuuuu!";
 }
 void Volby::nacitajSubory()
@@ -149,8 +153,54 @@ void Volby::nacitajSubory()
 	}
 
 	is.close();
+	std::cout << "data su nacitane";
 
 }
+void Volby::vypisMenu()
+{
+	int c;
+
+	bool cyklus = true;
+	while (cyklus)
+	{
+		cout << "----------------------------------------------\n\n" << endl;
+		cout << "1.Nacitaj data \n" << endl;
+		cout << "2.Vypis dediny \n" << endl;
+		cout << "0.Ukonci program \n" << endl;
+	
+		cout << "----------------------------------------------\n\n" << endl;
+
+
+		cin >> c;
+		switch (c)
+		{
+		case 1:nacitajSubory(); break;
+		case 2: vypisPodla(); break;
+		case 0: cyklus = false; break;
+		default: std::cout << "zadal si zly znak:"; break;
+
+		}
+	}
+}
+void Volby::vypisPodla()
+{
+	char c;
+	string vstup;
+	Kriterium<string, Oblast>* kNazov = new KriteriumNazov();
+	
+	
+	for(auto item : *dediny_)
+	{
+		if (true)
+		{
+			
+		}
+		std::cout << kNazov->evaluate(*item->accessData()) << "\n";
+	}
+	delete kNazov;
+}
+		
+	
 Volby::~Volby()
 {
 	

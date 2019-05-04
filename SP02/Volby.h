@@ -8,12 +8,14 @@
 class Volby
 {
 private:
-	structures::SortedSequenceTable<string, Dedina*>* dediny_;
+	structures::SortedSequenceTable<string, Oblast*>* dediny_;
 	structures::SortedSequenceTable<string, Kraj*>* kraje_;
 	structures::SortedSequenceTable<string, Okres*>* okresy_;
 public:
 	Volby();
 	~Volby();
 	void nacitajSubory();
+	void vypisMenu();
+	void vypisPodla();
 
 };

@@ -4,9 +4,22 @@
 #include "Oblast.h"
 
 class KriteriumNazov : public Kriterium<std::string,Oblast> {
-public: 
-	std::string evaluate(const Oblast& oblast) override
+public:
+	KriteriumNazov();
+	~KriteriumNazov();
+	std::string evaluate(Oblast& oblast) override
 	{
 		return oblast.get_nazov();
 	}
 };
+
+inline KriteriumNazov::KriteriumNazov()
+{
+	
+}
+inline KriteriumNazov::~KriteriumNazov()
+{
+	
+}
+
+
