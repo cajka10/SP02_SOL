@@ -7,7 +7,7 @@ class KriteriumNazov : public Kriterium<std::string,Oblast> {
 public:
 	KriteriumNazov();
 	~KriteriumNazov();
-	std::string evaluate(Oblast& oblast) override
+	std::string evaluate(const Oblast& oblast) override
 	{
 		return oblast.get_nazov();
 	}

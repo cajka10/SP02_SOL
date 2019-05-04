@@ -1,12 +1,12 @@
 #include "Obec.h"
 
-Dedina::Dedina(string nazov) : Oblast(nazov)
+Obec::Obec(string nazov) : Oblast(nazov)
 {
 
 }
 
 
-bool  Dedina::nachadzaSa(Oblast * oblast) const
+bool  Obec::nachadzaSa(Oblast * oblast) const
 {
 	if (oblast->get_nazov() != this->get_nazov_okresu())
 	{
@@ -14,7 +14,7 @@ bool  Dedina::nachadzaSa(Oblast * oblast) const
 	}
 	return true;
 }
-Dedina::~Dedina()
+Obec::~Obec()
 {
 
 }

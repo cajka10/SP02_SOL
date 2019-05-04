@@ -177,9 +177,6 @@
     <ClInclude Include="structures\vector\vector.h">
       <Filter>Header Files\structures</Filter>
     </ClInclude>
-    <ClInclude Include="Dedina.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
     <ClInclude Include="Volby.h">
       <Filter>Header Files</Filter>
     </ClInclude>
@@ -217,6 +214,12 @@
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="FilterFI.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Obec.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="FilterNazov.h">
       <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>
@@ -257,13 +260,13 @@
     <ClCompile Include="Volby.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="Dedina.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
     <ClCompile Include="Kraj.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
     <ClCompile Include="Okres.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="Obec.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
   </ItemGroup>

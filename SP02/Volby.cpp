@@ -5,21 +5,21 @@
 #include <experimental/filesystem>
 #include "Filter_fi.h"
 #include "KriteriumNazov.h"
+#include "FilterNazov.h"
 
 
 Volby::Volby()
 {
-	this->dediny_ = new structures::SortedSequenceTable<string, Oblast*>();
+	this->obce_ = new structures::SortedSequenceTable<string, Obec*>();
 	this->kraje_ = new structures::SortedSequenceTable<string, Kraj*>();
 	this->okresy_ = new structures::SortedSequenceTable<string, Okres*>();
 	vypisMenu();
-	//nacitajSubory();
 	std::cout << "ouuuuuuuu!";
 }
 void Volby::nacitajSubory()
 {
 
-	ifstream is("dediny.csv");
+	ifstream is("dediny_skrajmi.csv");
 
 	if (!is.is_open())
 	{
@@ -55,7 +55,7 @@ void Volby::nacitajSubory()
 		getline(is, pocetPlatHlasov2, ';');
 		getline(is, nazovOkresu, '\n');
 
-		Dedina* pomDedina = new Dedina(nazov);
+		Obec* pomDedina = new Obec(nazov);
 		pomDedina->set_pocet_zap_volicov1(stoi(pocetZapVolicov1));
 		pomDedina->set_pocet_vyd_obalok1(stoi(pocetVydObalok1));
 		pomDedina->set_ucast_volicov_percenta1(stod(ucast1));
@@ -68,8 +68,8 @@ void Volby::nacitajSubory()
 		pomDedina->set_pocet_odovzd_obalok1(stoi(pocetOdovzObalok2));
 		pomDedina->set_pocet_plat_hlasov1(stoi(pocetPlatHlasov2));
 		pomDedina->set_nazov_okresu(nazovOkresu);
-		dediny_->insert(nazov, pomDedina );
-		
+		obce_->insert(nazov, pomDedina );
+		delete pomDedina;
 	}
 	is.close();
 	is.clear();
@@ -187,28 +187,32 @@ void Volby::vypisPodla()
 	char c;
 	string vstup;
 	Kriterium<string, Oblast>* kNazov = new KriteriumNazov();
+	//Filter_fi<string, Oblast>* fNazov = new Filter_fi<string, Oblast>();
 	
-	
-	for(auto item : *dediny_)
+	std::cout << "Hladany uzemny celok: " << endl;
+	std::cin >> vstup;
+	for(auto item : *obce_)
 	{
-		if (true)
-		{
-			
-		}
-		std::cout << kNazov->evaluate(*item->accessData()) << "\n";
+		
+		/*fNazov->set_alpha(vstup);
+		if (fNazov->evaluate(*item->accessData(), *kNazov))
+		{*/
+			std::cout << kNazov->evaluate(*item->accessData()) << "\n";
+		//}
 	}
 	delete kNazov;
+
 }
 		
 	
 Volby::~Volby()
 {
 	
-	for (auto dedina : *dediny_)
+	for (auto dedina : *obce_)
 	{
-		delete dedina->accessData();
+		dedina->accessData();
 	}
-	delete dediny_;
+	delete obce_;
 
 	for (auto kraj : *kraje_)
 	{

@@ -5,17 +5,17 @@ class Kriterium
 public:
 	Kriterium();
 	~Kriterium();
-	virtual T evaluate(O& object) = 0;
+	virtual T evaluate(const O& object) = 0;
 };
 
 template <typename T, typename O>
 Kriterium<T, O>::~Kriterium()
 {
-	
+
 }
 template <typename T, typename O>
 Kriterium<T, O>::Kriterium()
 {
-	
+
 }
 

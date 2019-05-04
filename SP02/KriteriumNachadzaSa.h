@@ -1,10 +1,10 @@
 #pragma once
 #include "Kriterium.h"
-#include "Dedina.h"
+#include "Obec.h"
 
-class KriteriumNachadzaSa : public Kriterium<bool, Dedina> {
+class KriteriumNachadzaSa : public Kriterium<bool, Obec> {
 public:
-	bool evaluate(const Dedina& dedina) override
+	bool evaluate(const Obec& dedina) override
 	{
 		return dedina.nachadzaSa(oblast_);
 	}

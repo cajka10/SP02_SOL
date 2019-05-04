@@ -25,6 +25,10 @@ public:
 		  
 	{
 	}
+	~Oblast()
+	{
+		
+	}
 
 
 	std::string get_nazov() const

@@ -5,9 +5,9 @@ template <typename T, typename O>
 class FilterFI : public Filter<T, O>
 {
 public:
-	bool evaluate(const O& o, const Kriterium<T, O>& parKriterium) override
+	 bool evaluate(const O& o, const Kriterium<T, O>& c) 
 	{
-		T result = parKriterium.evaluate(o);
+		T result = c.evaluate(o);
 		return result >= alpha && result <= beta;
 
 	}
