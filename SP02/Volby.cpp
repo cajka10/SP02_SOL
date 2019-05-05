@@ -3,14 +3,14 @@
 #include <iostream>
 #include "structures/table/unsorted_sequence_table.h"
 #include <experimental/filesystem>
-#include "Filter_fi.h"
+///#include "Filter_fi.h"
 #include "KriteriumNazov.h"
-#include "FilterNazov.h"
+//#include "FilterNazov.h"
 
 
 Volby::Volby()
 {
-	this->obce_ = new structures::SortedSequenceTable<string, Obec*>();
+	this->obce_ = new structures::SortedSequenceTable<string, Oblast*>();
 	this->kraje_ = new structures::SortedSequenceTable<string, Kraj*>();
 	this->okresy_ = new structures::SortedSequenceTable<string, Okres*>();
 	vypisMenu();
@@ -61,15 +61,15 @@ void Volby::nacitajSubory()
 		pomDedina->set_ucast_volicov_percenta1(stod(ucast1));
 		pomDedina->set_pocet_odovzd_obalok1(stoi(pocetOdovzObalok1));
 		pomDedina->set_pocet_plat_hlasov1(stoi(pocetPlatHlasov1));
-		
+
 		pomDedina->set_pocet_zap_volicov1(stoi(pocetZapVolicov2));
 		pomDedina->set_pocet_vyd_obalok1(stoi(pocetVydObalok2));
 		pomDedina->set_ucast_volicov_percenta1(stod(ucast2));
 		pomDedina->set_pocet_odovzd_obalok1(stoi(pocetOdovzObalok2));
 		pomDedina->set_pocet_plat_hlasov1(stoi(pocetPlatHlasov2));
 		pomDedina->set_nazov_okresu(nazovOkresu);
-		obce_->insert(nazov, pomDedina );
-		delete pomDedina;
+		obce_->insert(nazov, pomDedina);
+		
 	}
 	is.close();
 	is.clear();
@@ -81,7 +81,7 @@ void Volby::nacitajSubory()
 	}
 	while (is.good())
 	{
-	
+
 		getline(is, nazov, ';');
 		getline(is, pocetZapVolicov1, ';');
 		getline(is, pocetVydObalok1, ';');
@@ -151,9 +151,10 @@ void Volby::nacitajSubory()
 		okresy_->insert(nazov, pomOkres);
 
 	}
+	
 
 	is.close();
-	std::cout << "data su nacitane";
+	std::cout << "data su nacitane \n";
 
 }
 void Volby::vypisMenu()
@@ -167,7 +168,7 @@ void Volby::vypisMenu()
 		cout << "1.Nacitaj data \n" << endl;
 		cout << "2.Vypis dediny \n" << endl;
 		cout << "0.Ukonci program \n" << endl;
-	
+
 		cout << "----------------------------------------------\n\n" << endl;
 
 
@@ -186,29 +187,41 @@ void Volby::vypisPodla()
 {
 	char c;
 	string vstup;
-	Kriterium<string, Oblast>* kNazov = new KriteriumNazov();
-	//Filter_fi<string, Oblast>* fNazov = new Filter_fi<string, Oblast>();
+	Kriterium<string, Oblast>* kNazov = new KriteriumNazov<string, Oblast>();
 	
-	std::cout << "Hladany uzemny celok: " << endl;
-	std::cin >> vstup;
-	for(auto item : *obce_)
+
+	for (auto *item : *obce_)
 	{
-		
-		/*fNazov->set_alpha(vstup);
-		if (fNazov->evaluate(*item->accessData(), *kNazov))
-		{*/
-			std::cout << kNazov->evaluate(*item->accessData()) << "\n";
-		//}
+
+		std::cout << kNazov->evaluate(*item->accessData()) + "\n";
 	}
 	delete kNazov;
 
 }
-		
 	
+
+
+
+
 Volby::~Volby()
 {
-	
-	for (auto dedina : *obce_)
+	for (auto obce : *obce_)
+	{
+		delete obce->accessData();
+	}
+	delete obce_;
+	for (auto kraj : *kraje_)
+	{
+		delete kraj->accessData();
+	}
+	delete kraje_;
+
+	for (auto okres : *okresy_)
+	{
+		delete okres->accessData();
+	}
+	delete okresy_; 
+	/*for (auto dedina : *obce_)
 	{
 		dedina->accessData();
 	}
@@ -224,6 +237,6 @@ Volby::~Volby()
 	{
 		delete okres->accessData();
 	}
-	delete okresy_;
+	delete okresy_;*/
 }
 

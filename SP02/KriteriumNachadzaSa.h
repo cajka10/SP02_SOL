@@ -4,7 +4,7 @@
 
 class KriteriumNachadzaSa : public Kriterium<bool, Obec> {
 public:
-	bool evaluate(const Obec& dedina) override
+	bool evaluate( Obec& dedina) override
 	{
 		return dedina.nachadzaSa(oblast_);
 	}

@@ -207,19 +207,16 @@
     <ClInclude Include="KriteriumUcast.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="Filter.h">
+    <ClInclude Include="Obec.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="Filter_fi.h">
+    <ClInclude Include="Filter.h">
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="FilterFI.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="Obec.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="FilterNazov.h">
+    <ClInclude Include="Filter_fi.h">
       <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>

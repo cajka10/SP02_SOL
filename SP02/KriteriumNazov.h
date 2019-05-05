@@ -3,23 +3,23 @@
 #include "Kriterium.h"
 #include "Oblast.h"
 
-class KriteriumNazov : public Kriterium<std::string,Oblast> {
+template <typename T, typename O>
+class KriteriumNazov : public Kriterium<std::string, Oblast>
+{
 public:
-	KriteriumNazov();
-	~KriteriumNazov();
-	std::string evaluate(const Oblast& oblast) override
+	std::string evaluate(Oblast& oblast) override
 	{
 		return oblast.get_nazov();
 	}
+	KriteriumNazov();
+
 };
 
-inline KriteriumNazov::KriteriumNazov()
+template<typename T, typename O>
+inline KriteriumNazov<T, O>::KriteriumNazov()
 {
-	
 }
-inline KriteriumNazov::~KriteriumNazov()
-{
-	
-}
+
+
 
 

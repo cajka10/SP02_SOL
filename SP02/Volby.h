@@ -8,7 +8,7 @@
 class Volby
 {
 private:
-	structures::SortedSequenceTable<string, Obec*>* obce_;
+	structures::SortedSequenceTable<string, Oblast*>* obce_;
 	structures::SortedSequenceTable<string, Kraj*>* kraje_;
 	structures::SortedSequenceTable<string, Okres*>* okresy_;
 public:
