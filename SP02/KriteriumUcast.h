@@ -4,7 +4,7 @@
 
 class KriteriumUcast : public Kriterium<int, Oblast>
 {
-	int const evaluate( Oblast& oblast) override
+	int const evaluate(const Oblast& oblast) override
 	{
 		oblast.get_ucast_volicov_percenta(kolo);
 	}

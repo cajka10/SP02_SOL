@@ -5,7 +5,7 @@
 class KriteriumVolici : public Kriterium<int, Oblast>
 {
 public:
-	int evaluate( Oblast& oblast) override {
+	int evaluate(const Oblast& oblast) override {
 		oblast.get_pocet_zap_volicov(kolo);
 	}
 

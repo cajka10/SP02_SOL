@@ -5,12 +5,13 @@
 #include <experimental/filesystem>
 ///#include "Filter_fi.h"
 #include "KriteriumNazov.h"
+#include "Filter_fi.h"
 //#include "FilterNazov.h"
 
 
 Volby::Volby()
 {
-	this->obce_ = new structures::SortedSequenceTable<string, Oblast*>();
+	this->obce_ = new structures::SortedSequenceTable<string, Obec*>();
 	this->kraje_ = new structures::SortedSequenceTable<string, Kraj*>();
 	this->okresy_ = new structures::SortedSequenceTable<string, Okres*>();
 	vypisMenu();
@@ -69,6 +70,7 @@ void Volby::nacitajSubory()
 		pomDedina->set_pocet_plat_hlasov1(stoi(pocetPlatHlasov2));
 		pomDedina->set_nazov_okresu(nazovOkresu);
 		obce_->insert(nazov, pomDedina);
+		
 		
 	}
 	is.close();
@@ -185,17 +187,24 @@ void Volby::vypisMenu()
 }
 void Volby::vypisPodla()
 {
-	char c;
+	
 	string vstup;
 	Kriterium<string, Oblast>* kNazov = new KriteriumNazov<string, Oblast>();
-	
+	Filter_fi<string, Oblast>* filterNazov = new Filter_fi<string, Oblast>();
+	std::cout << "zadaj vstup co hladas: \n";
+	std::cin >> vstup;
+	filterNazov->set_alpha(vstup);
 
 	for (auto *item : *obce_)
 	{
+		if (filterNazov->evaluate(*item->accessData(), *kNazov))
+		{
+			std::cout << kNazov->evaluate(*item->accessData()) + "\n";
 
-		std::cout << kNazov->evaluate(*item->accessData()) + "\n";
+		}
 	}
 	delete kNazov;
+	delete filterNazov;
 
 }
 	
@@ -207,9 +216,11 @@ Volby::~Volby()
 {
 	for (auto obce : *obce_)
 	{
+		
 		delete obce->accessData();
 	}
 	delete obce_;
+
 	for (auto kraj : *kraje_)
 	{
 		delete kraj->accessData();
@@ -221,11 +232,8 @@ Volby::~Volby()
 		delete okres->accessData();
 	}
 	delete okresy_; 
-	/*for (auto dedina : *obce_)
-	{
-		dedina->accessData();
-	}
-	delete obce_;
+
+	/*delete obce_;
 
 	for (auto kraj : *kraje_)
 	{

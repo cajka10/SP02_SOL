@@ -7,7 +7,7 @@ template <typename T, typename O>
 class KriteriumNazov : public Kriterium<std::string, Oblast>
 {
 public:
-	std::string evaluate(Oblast& oblast) override
+	std::string evaluate(const Oblast& oblast) override
 	{
 		return oblast.get_nazov();
 	}

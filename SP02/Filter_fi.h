@@ -5,17 +5,9 @@ template <typename T, typename O>
 class Filter_fi : public Filter<T, O>
 {
 public:
-	Filter_fi()
-	{
+	Filter_fi();
 
-	}
-
-	~Filter_fi()
-	{
-
-	}
-
-	bool evaluate(const O& objekt, const Kriterium<T, O>& c) override
+	bool evaluate(const O& objekt,  Kriterium<T, O>& c) override
 	{
 		return c.evaluate(objekt) == alpha;
 	}
@@ -28,3 +20,9 @@ public:
 private:
 	T alpha;
 };
+
+template <typename T, typename O>
+Filter_fi<T, O>::Filter_fi()
+{
+	
+}
