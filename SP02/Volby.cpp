@@ -9,6 +9,7 @@
 #include "KriteriumVolici.h"
 #include "FilterFI.h"
 #include "KriteriumUcast.h"
+#include "KriteriumNachadzaSa.h"
 //#include "FilterNazov.h"
 
 
@@ -289,7 +290,7 @@ void Volby::vypisPodlaVolicov()
 		if (filterVolici->evaluate(*item->accessData(), *kVolici))
 		{
 			item->accessData()->vypisInfo();
-			break;
+		
 
 		}
 	}
@@ -300,7 +301,7 @@ void Volby::vypisPodlaVolicov()
 		{
 			item->accessData()->vypisInfo();
 
-			break;
+		
 
 		}
 	}
@@ -310,8 +311,7 @@ void Volby::vypisPodlaVolicov()
 		if (filterVolici->evaluate(*item->accessData(), *kVolici))
 		{
 			item->accessData()->vypisInfo();
-			break;
-
+	
 
 		}
 	}
@@ -347,39 +347,67 @@ void Volby::vypisPodlaUcasti()
 
 	for (auto *item : *obce_)
 	{
-		
+
 
 		if (filterUcast->evaluate(*item->accessData(), *kUcast))
 		{
 			item->accessData()->vypisInfo();
 
-			break;
+			
 		}
+	}
 
-		for (auto *item : *okresy_)
+	for (auto *item : *okresy_)
+	{
+
+		if (filterUcast->evaluate(*item->accessData(), *kUcast))
 		{
+			item->accessData()->vypisInfo();
+			
 
-			if (filterUcast->evaluate(*item->accessData(), *kUcast))
-			{
-				item->accessData()->vypisInfo();
-				break;
-
-			}
 		}
-		for (auto *item : *kraje_)
+	}
+	for (auto *item : *kraje_)
+	{
+
+		if (filterUcast->evaluate(*item->accessData(), *kUcast))
 		{
+			item->accessData()->vypisInfo();
 
-			if (filterUcast->evaluate(*item->accessData(), *kUcast))
-			{
-				item->accessData()->vypisInfo();
-
-				break;
-			}
+			
 		}
+	}
 
-		delete kUcast;
-		delete filterUcast;
+	delete kUcast;
+	delete filterUcast;
 
+
+}
+
+void Volby::zoradPodla()
+{
+	char rozhodnutie;
+	KriteriumUcast<double, Oblast>* kUcast = new KriteriumUcast<double, Oblast>();
+	KriteriumNachadzaSa<bool,Oblast>* kNachadzaSa = new KriteriumNachadzaSa<bool, Oblast>();
+	
+
+	FilterFI<double, Oblast>* filterUcast = new FilterFI<double, Oblast>();
+	Filter_fi<bool, Oblast>* filterNachadzaSa = new Filter_fi<bool, Oblast>();
+
+	
+
+
+	std::cout << "Podla coho chces Zoradit uzemny celok?: \n";
+	cout << "a.Nazov \n" << endl;
+	cout << "b.Volici \n" << endl;
+	cout << "c.Ucast\n" << endl;
+	std::cin >> rozhodnutie;
+	switch (rozhodnutie)
+	{
+	case 'a': this->zoradPodlaNazvu(); break;
+	case 'b': this->zoradPodlaVolicov(); break;
+	case 'c': this->zoradPodlaUcasti(); break;
+	default: std::cout << "zadal si zly znak"; break;
 	}
 }
 

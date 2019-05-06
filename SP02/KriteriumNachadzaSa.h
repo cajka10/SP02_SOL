@@ -1,9 +1,10 @@
 #pragma once
 #include "Kriterium.h"
 #include "Obec.h"
-
+template <typename T, typename O>
 class KriteriumNachadzaSa : public Kriterium<bool, Obec> {
 public:
+	KriteriumNachadzaSa();
 	bool evaluate(const Obec& dedina) override
 	{
 		return dedina.nachadzaSa(oblast_);
@@ -16,3 +17,10 @@ public:
 
 private: Oblast* oblast_;
 };
+
+template <typename T, typename O>
+KriteriumNachadzaSa<T, O>::KriteriumNachadzaSa()
+{
+	
+}
+
