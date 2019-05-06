@@ -63,11 +63,11 @@ void Volby::nacitajSubory()
 		pomDedina->set_pocet_odovzd_obalok1(stoi(pocetOdovzObalok1));
 		pomDedina->set_pocet_plat_hlasov1(stoi(pocetPlatHlasov1));
 
-		pomDedina->set_pocet_zap_volicov1(stoi(pocetZapVolicov2));
-		pomDedina->set_pocet_vyd_obalok1(stoi(pocetVydObalok2));
-		pomDedina->set_ucast_volicov_percenta1(stod(ucast2));
-		pomDedina->set_pocet_odovzd_obalok1(stoi(pocetOdovzObalok2));
-		pomDedina->set_pocet_plat_hlasov1(stoi(pocetPlatHlasov2));
+		pomDedina->set_pocet_zap_volicov2(stoi(pocetZapVolicov2));
+		pomDedina->set_pocet_vyd_obalok2(stoi(pocetVydObalok2));
+		pomDedina->set_ucast_volicov_percenta2(stod(ucast2));
+		pomDedina->set_pocet_odovzd_obalok2(stoi(pocetOdovzObalok2));
+		pomDedina->set_pocet_plat_hlasov2(stoi(pocetPlatHlasov2));
 		pomDedina->set_nazov_okresu(nazovOkresu);
 		obce_->insert(nazov, pomDedina);
 		
@@ -104,11 +104,11 @@ void Volby::nacitajSubory()
 		pomKraj->set_pocet_odovzd_obalok1(stoi(pocetOdovzObalok1));
 		pomKraj->set_pocet_plat_hlasov1(stoi(pocetPlatHlasov1));
 
-		pomKraj->set_pocet_zap_volicov1(stoi(pocetZapVolicov2));
-		pomKraj->set_pocet_vyd_obalok1(stoi(pocetVydObalok2));
-		pomKraj->set_ucast_volicov_percenta1(stod(ucast2));
-		pomKraj->set_pocet_odovzd_obalok1(stoi(pocetOdovzObalok2));
-		pomKraj->set_pocet_plat_hlasov1(stoi(pocetPlatHlasov2));
+		pomKraj->set_pocet_zap_volicov2(stoi(pocetZapVolicov2));
+		pomKraj->set_pocet_vyd_obalok2(stoi(pocetVydObalok2));
+		pomKraj->set_ucast_volicov_percenta2(stod(ucast2));
+		pomKraj->set_pocet_odovzd_obalok2(stoi(pocetOdovzObalok2));
+		pomKraj->set_pocet_plat_hlasov2(stoi(pocetPlatHlasov2));
 		kraje_->insert(nazov, pomKraj);
 
 	}
@@ -145,11 +145,11 @@ void Volby::nacitajSubory()
 		pomOkres->set_pocet_odovzd_obalok1(stoi(pocetOdovzObalok1));
 		pomOkres->set_pocet_plat_hlasov1(stoi(pocetPlatHlasov1));
 
-		pomOkres->set_pocet_zap_volicov1(stoi(pocetZapVolicov2));
-		pomOkres->set_pocet_vyd_obalok1(stoi(pocetVydObalok2));
-		pomOkres->set_ucast_volicov_percenta1(stod(ucast2));
-		pomOkres->set_pocet_odovzd_obalok1(stoi(pocetOdovzObalok2));
-		pomOkres->set_pocet_plat_hlasov1(stoi(pocetPlatHlasov2));
+		pomOkres->set_pocet_zap_volicov2(stoi(pocetZapVolicov2));
+		pomOkres->set_pocet_vyd_obalok2(stoi(pocetVydObalok2));
+		pomOkres->set_ucast_volicov_percenta2(stod(ucast2));
+		pomOkres->set_pocet_odovzd_obalok2(stoi(pocetOdovzObalok2));
+		pomOkres->set_pocet_plat_hlasov2(stoi(pocetPlatHlasov2));
 		okresy_->insert(nazov, pomOkres);
 
 	}
@@ -189,9 +189,12 @@ void Volby::vypisPodla()
 {
 	
 	string vstup;
+	char rozhodnutie;
 	Kriterium<string, Oblast>* kNazov = new KriteriumNazov<string, Oblast>();
 	Filter_fi<string, Oblast>* filterNazov = new Filter_fi<string, Oblast>();
-	std::cout << "zadaj vstup co hladas: \n";
+	
+
+	std::cout << "zadaj Uzemny celok, ktory hladas: \n";
 	std::cin >> vstup;
 	filterNazov->set_alpha(vstup);
 
@@ -199,7 +202,8 @@ void Volby::vypisPodla()
 	{
 		if (filterNazov->evaluate(*item->accessData(), *kNazov))
 		{
-			std::cout << kNazov->evaluate(*item->accessData()) + "\n";
+			item->accessData()->vypisInfo();
+			std::cout << "Okres: " << item->accessData()->get_nazov_okresu();
 
 		}
 	}

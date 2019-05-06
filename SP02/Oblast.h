@@ -1,11 +1,12 @@
 #pragma once
 #include <string>
+#include <iostream>
 
 class Oblast
 {
 private:
 	std::string nazov_;
-	
+
 	int pocetZapVolicov1_;
 	int pocetVydObalok1_;
 	double ucastVolicovPercenta1_;
@@ -22,14 +23,29 @@ public:
 
 	Oblast(std::string nazov)
 		: nazov_(nazov)
-		  
+
 	{
 	}
 	~Oblast()
 	{
-		
-	}
 
+	}
+	void vypisInfo(){
+		std::cout << "-------------------------------------------------------------\n";
+		std::cout << this->get_nazov() << "\n";
+		std::cout << "1.Kolo: \n";
+		std::cout << "Volici:" << this->get_pocet_zap_volicov(1) << "\n";
+		std::cout << "Vydane Obalky:" << this->get_pocet_vyd_obalok(1) << "\n";
+		std::cout << "Ucast:" << this->get_ucast_volicov_percenta(1) << "\n";
+		std::cout << "Odovzdane Obalky:" << this->get_pocet_odovzd_obalok(1) << "\n";
+		std::cout << "2.Kolo: \n";
+		std::cout << "Volici:" << this->get_pocet_zap_volicov(2) << "\n";
+		std::cout << "Vydane Obalky:" << this->get_pocet_vyd_obalok(2) << "\n";
+		std::cout << "Ucast:" << this->get_ucast_volicov_percenta(2) << "\n";
+		std::cout << "Odovzdane Obalky:" << this->get_pocet_odovzd_obalok(2) << "\n";
+
+		std::cout << "-------------------------------------------------------------\n";
+	}
 
 	std::string get_nazov() const
 	{
