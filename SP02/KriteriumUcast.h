@@ -1,12 +1,15 @@
 #pragma once
 #include "Kriterium.h"
 #include "Oblast.h"
-
-class KriteriumUcast : public Kriterium<int, Oblast>
+template <typename T, typename O>
+class KriteriumUcast : public Kriterium<double, Oblast>
 {
-	int const evaluate(const Oblast& oblast) override
+public:
+	KriteriumUcast();
+
+	double evaluate(const Oblast& oblast) override
 	{
-		oblast.get_ucast_volicov_percenta(kolo);
+		return oblast.get_ucast_volicov_percenta(kolo);
 	}
 
 	void set_kolo(int kolo)
@@ -16,3 +19,10 @@ class KriteriumUcast : public Kriterium<int, Oblast>
 private:
 	int kolo;
 };
+
+template <typename T, typename O>
+KriteriumUcast<T, O>::KriteriumUcast()
+{
+
+}
+

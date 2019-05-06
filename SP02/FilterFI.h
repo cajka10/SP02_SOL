@@ -21,8 +21,15 @@ public:
 	{
 		this->beta = beta;
 	}
+	FilterFI();
 
 private:
 	T alpha;
 	T beta;
 };
+
+template <typename T, typename O>
+FilterFI<T, O>::FilterFI()
+{
+
+}

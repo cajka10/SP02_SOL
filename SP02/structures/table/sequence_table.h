@@ -147,7 +147,8 @@ namespace structures
 		}
 		else
 		{
-			throw std::out_of_range("SequenceTable<K, T>::operator[]: Data not found!");
+			//throw std::out_of_range("SequenceTable<K, T>::operator[]: Data not found!");
+
 		}
 	}
 

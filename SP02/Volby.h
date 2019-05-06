@@ -17,5 +17,12 @@ public:
 	void nacitajSubory();
 	void vypisMenu();
 	void vypisPodla();
+	void vypisPodlaNazvu();
+	void vypisPodlaVolicov();
+	void vypisPodlaUcasti();
+	void zoradPodla();
+	void zoradPodlaNazvu();
+	void zoradPodlaVolicov();
+	void zoradPodlaUcasti();
 
 };

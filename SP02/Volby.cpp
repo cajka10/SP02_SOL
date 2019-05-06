@@ -6,6 +6,9 @@
 ///#include "Filter_fi.h"
 #include "KriteriumNazov.h"
 #include "Filter_fi.h"
+#include "KriteriumVolici.h"
+#include "FilterFI.h"
+#include "KriteriumUcast.h"
 //#include "FilterNazov.h"
 
 
@@ -70,8 +73,8 @@ void Volby::nacitajSubory()
 		pomDedina->set_pocet_plat_hlasov2(stoi(pocetPlatHlasov2));
 		pomDedina->set_nazov_okresu(nazovOkresu);
 		obce_->insert(nazov, pomDedina);
-		
-		
+
+
 	}
 	is.close();
 	is.clear();
@@ -153,7 +156,7 @@ void Volby::nacitajSubory()
 		okresy_->insert(nazov, pomOkres);
 
 	}
-	
+
 
 	is.close();
 	std::cout << "data su nacitane \n";
@@ -187,31 +190,199 @@ void Volby::vypisMenu()
 }
 void Volby::vypisPodla()
 {
-	
-	string vstup;
+
 	char rozhodnutie;
-	Kriterium<string, Oblast>* kNazov = new KriteriumNazov<string, Oblast>();
+
+
+	std::cout << "Podla coho chces vzhladat uzemny celok?: \n";
+	cout << "a.Nazov \n" << endl;
+	cout << "b.Volici \n" << endl;
+	cout << "c.Ucast\n" << endl;
+	std::cin >> rozhodnutie;
+	switch (rozhodnutie)
+	{
+	case 'a': this->vypisPodlaNazvu(); break;
+	case 'b': this->vypisPodlaVolicov(); break;
+	case 'c': this->vypisPodlaUcasti(); break;
+	default: std::cout << "zadal si zly znak"; break;
+	}
+
+
+
+
+}
+
+
+
+void Volby::vypisPodlaNazvu()
+{
+	string vstup;
 	Filter_fi<string, Oblast>* filterNazov = new Filter_fi<string, Oblast>();
-	
+	Kriterium<string, Oblast>* kNazov = new KriteriumNazov<string, Oblast>();
 
 	std::cout << "zadaj Uzemny celok, ktory hladas: \n";
 	std::cin >> vstup;
 	filterNazov->set_alpha(vstup);
 
-	for (auto *item : *obce_)
+
+	if (obce_->containsKey(vstup))
 	{
-		if (filterNazov->evaluate(*item->accessData(), *kNazov))
-		{
-			item->accessData()->vypisInfo();
-			std::cout << "Okres: " << item->accessData()->get_nazov_okresu();
+		std::cout << "Obec\n";
+
+		if (filterNazov->evaluate(*obce_->operator[](vstup), *kNazov)) {
+			obce_->operator[](vstup)->vypisInfo();
+
+		}
+
+	}
+
+
+	if (okresy_->containsKey(vstup))
+	{
+		std::cout << "Okres\n";
+
+		if (filterNazov->evaluate(*okresy_->operator[](vstup), *kNazov)) {
+			okresy_->operator[](vstup)->vypisInfo();
+
+
+		}
+	}
+
+
+	if (kraje_->containsKey(vstup))
+	{
+		std::cout << "Kraj:\n";
+
+		if (filterNazov->evaluate(*kraje_->operator[](vstup), *kNazov)) {
+			kraje_->operator[](vstup)->vypisInfo();
+
 
 		}
 	}
 	delete kNazov;
 	delete filterNazov;
+}
+
+void Volby::vypisPodlaVolicov()
+{
+	int a;
+	int b;
+	int kolo;
+	KriteriumVolici<int, Oblast>* kVolici = new KriteriumVolici<int, Oblast>();
+	FilterFI<int, Oblast>* filterVolici = new FilterFI<int, Oblast>();
+	std::cout << " Zadaj interval, pre pocet volicov a v ktorom kole: \n";
+
+	std::cout << "zadaj dolna hranica: \n";
+	std::cin >> a;
+	std::cout << "zadaj horna hranica: \n";
+	std::cin >> b;
+	std::cout << "zadaj, pre ktore kolo: \n";
+	std::cin >> kolo;
+	filterVolici->set_alpha(a);
+	filterVolici->set_beta(b);
+	kVolici->set_kolo(kolo);
+	std::cout << "Obec\n";
+
+	for (auto *item : *obce_)
+	{
+
+		if (filterVolici->evaluate(*item->accessData(), *kVolici))
+		{
+			item->accessData()->vypisInfo();
+			break;
+
+		}
+	}
+	for (auto *item : *okresy_)
+	{
+
+		if (filterVolici->evaluate(*item->accessData(), *kVolici))
+		{
+			item->accessData()->vypisInfo();
+
+			break;
+
+		}
+	}
+	for (auto *item : *kraje_)
+	{
+
+		if (filterVolici->evaluate(*item->accessData(), *kVolici))
+		{
+			item->accessData()->vypisInfo();
+			break;
+
+
+		}
+	}
+
+	delete kVolici;
+	delete filterVolici;
+
 
 }
-	
+
+void Volby::vypisPodlaUcasti()
+{
+	int a;
+	int b;
+	int kolo;
+	KriteriumUcast<double, Oblast>* kUcast = new KriteriumUcast<double, Oblast>();
+	FilterFI<double, Oblast>* filterUcast = new FilterFI<double, Oblast>();
+
+	std::cout << " Zadaj interval, pre pocet volicov a v ktorom kole: \n";
+
+	std::cout << "zadaj dolna hranica: \n";
+	std::cin >> a;
+	std::cout << "zadaj horna hranica: \n";
+	std::cin >> b;
+	std::cout << "zadaj, pre ktore kolo: \n";
+	std::cin >> kolo;
+	filterUcast->set_alpha(a);
+	filterUcast->set_beta(b);
+	kUcast->set_kolo(kolo);
+
+	std::cout << "Obec\n";
+
+
+	for (auto *item : *obce_)
+	{
+		
+
+		if (filterUcast->evaluate(*item->accessData(), *kUcast))
+		{
+			item->accessData()->vypisInfo();
+
+			break;
+		}
+
+		for (auto *item : *okresy_)
+		{
+
+			if (filterUcast->evaluate(*item->accessData(), *kUcast))
+			{
+				item->accessData()->vypisInfo();
+				break;
+
+			}
+		}
+		for (auto *item : *kraje_)
+		{
+
+			if (filterUcast->evaluate(*item->accessData(), *kUcast))
+			{
+				item->accessData()->vypisInfo();
+
+				break;
+			}
+		}
+
+		delete kUcast;
+		delete filterUcast;
+
+	}
+}
+
 
 
 
@@ -220,7 +391,7 @@ Volby::~Volby()
 {
 	for (auto obce : *obce_)
 	{
-		
+
 		delete obce->accessData();
 	}
 	delete obce_;
@@ -235,20 +406,8 @@ Volby::~Volby()
 	{
 		delete okres->accessData();
 	}
-	delete okresy_; 
+	delete okresy_;
 
-	/*delete obce_;
 
-	for (auto kraj : *kraje_)
-	{
-		delete kraj->accessData();
-	}
-	delete kraje_;
-
-	for (auto okres : *okresy_)
-	{
-		delete okres->accessData();
-	}
-	delete okresy_;*/
 }
 
