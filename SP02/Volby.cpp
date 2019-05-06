@@ -3,14 +3,8 @@
 #include <iostream>
 #include "structures/table/unsorted_sequence_table.h"
 #include <experimental/filesystem>
-///#include "Filter_fi.h"
-#include "KriteriumNazov.h"
-#include "Filter_fi.h"
-#include "KriteriumVolici.h"
-#include "FilterFI.h"
-#include "KriteriumUcast.h"
-#include "KriteriumNachadzaSa.h"
-//#include "FilterNazov.h"
+
+
 
 
 Volby::Volby()
@@ -18,6 +12,16 @@ Volby::Volby()
 	this->obce_ = new structures::SortedSequenceTable<string, Obec*>();
 	this->kraje_ = new structures::SortedSequenceTable<string, Kraj*>();
 	this->okresy_ = new structures::SortedSequenceTable<string, Okres*>();
+	this->filterNachadzaSa = new Filter_fi<bool, Oblast>();
+	this->filterUcast = new FilterFI<double, Oblast>();
+	this->filterNazov = new Filter_fi<string, Oblast>();
+	this->filterVolici = new FilterFI<int, Oblast>();
+
+	this->kNazov = new KriteriumNazov<string, Oblast>();
+	this->kVolici = new KriteriumVolici<int, Oblast>();
+	this->kUcast = new KriteriumUcast<double, Oblast>();
+	this->kNachadzaSa = new KriteriumNachadzaSa<bool, Oblast>();
+		
 	vypisMenu();
 	std::cout << "ouuuuuuuu!";
 }
@@ -218,8 +222,7 @@ void Volby::vypisPodla()
 void Volby::vypisPodlaNazvu()
 {
 	string vstup;
-	Filter_fi<string, Oblast>* filterNazov = new Filter_fi<string, Oblast>();
-	Kriterium<string, Oblast>* kNazov = new KriteriumNazov<string, Oblast>();
+	
 
 	std::cout << "zadaj Uzemny celok, ktory hladas: \n";
 	std::cin >> vstup;
@@ -260,8 +263,7 @@ void Volby::vypisPodlaNazvu()
 
 		}
 	}
-	delete kNazov;
-	delete filterNazov;
+	
 }
 
 void Volby::vypisPodlaVolicov()
@@ -269,8 +271,7 @@ void Volby::vypisPodlaVolicov()
 	int a;
 	int b;
 	int kolo;
-	KriteriumVolici<int, Oblast>* kVolici = new KriteriumVolici<int, Oblast>();
-	FilterFI<int, Oblast>* filterVolici = new FilterFI<int, Oblast>();
+	
 	std::cout << " Zadaj interval, pre pocet volicov a v ktorom kole: \n";
 
 	std::cout << "zadaj dolna hranica: \n";
@@ -316,8 +317,7 @@ void Volby::vypisPodlaVolicov()
 		}
 	}
 
-	delete kVolici;
-	delete filterVolici;
+	
 
 
 }
@@ -327,8 +327,7 @@ void Volby::vypisPodlaUcasti()
 	int a;
 	int b;
 	int kolo;
-	KriteriumUcast<double, Oblast>* kUcast = new KriteriumUcast<double, Oblast>();
-	FilterFI<double, Oblast>* filterUcast = new FilterFI<double, Oblast>();
+	
 
 	std::cout << " Zadaj interval, pre pocet volicov a v ktorom kole: \n";
 
@@ -378,21 +377,18 @@ void Volby::vypisPodlaUcasti()
 		}
 	}
 
-	delete kUcast;
-	delete filterUcast;
+	
 
 
 }
 
-void Volby::zoradPodla()
+void Volby::zoradMenu()
 {
 	char rozhodnutie;
-	KriteriumUcast<double, Oblast>* kUcast = new KriteriumUcast<double, Oblast>();
-	KriteriumNachadzaSa<bool,Oblast>* kNachadzaSa = new KriteriumNachadzaSa<bool, Oblast>();
+	
 	
 
-	FilterFI<double, Oblast>* filterUcast = new FilterFI<double, Oblast>();
-	Filter_fi<bool, Oblast>* filterNachadzaSa = new Filter_fi<bool, Oblast>();
+	
 
 	
 
@@ -404,12 +400,14 @@ void Volby::zoradPodla()
 	std::cin >> rozhodnutie;
 	switch (rozhodnutie)
 	{
-	case 'a': this->zoradPodlaNazvu(); break;
-	case 'b': this->zoradPodlaVolicov(); break;
-	case 'c': this->zoradPodlaUcasti(); break;
+	case 'a': ; break;
+	case 'b': ; break;
+	case 'c': ; break;
 	default: std::cout << "zadal si zly znak"; break;
 	}
 }
+
+
 
 
 
@@ -435,6 +433,13 @@ Volby::~Volby()
 		delete okres->accessData();
 	}
 	delete okresy_;
+
+	delete kNazov;
+	delete filterNazov;
+	delete kVolici;
+	delete filterNachadzaSa;
+	delete filterUcast;
+	delete filterVolici;
 
 
 }
