@@ -42,27 +42,11 @@ public:
 	void vypisPodlaVolicov();
 	void vypisPodlaUcasti();
 	void zoradMenu();
-	template<typename K, typename T, typename S>
-	void zoradPodla(structures::SortedSequenceTable<K, T>& table, Kriterium<S,T>& kriterium);
+
+	
 	
 
 };
 
-template<typename K, typename T, typename S>
-inline void Volby::zoradPodla(structures::SortedSequenceTable<K, T>& table, Kriterium<S, T>& kriterium)
-{
-	
-	structures::UnsortedSequenceTable<string, Oblast*>* kktina = new structures::UnsortedSequenceTable<string, Oblast*>();
 
-	for (auto *item : table)
-	{
-		if (filterUcast->evaluate(*item->accessData(), kUcast) && filterNachadzaSa->evaluate(*item->accessData(), kNachadzaSa))
-		{
-			
-			
 
-		}
-	}
-	structures::HeapSort<K, T> heap_sort = new structures::HeapSort<K, T>;
-	heap_sort.sort(table);
-}

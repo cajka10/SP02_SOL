@@ -176,7 +176,7 @@ namespace structures
 		}
 		else
 		{
-			throw std::logic_error("SequenceTable<K, T>::insert: Key already present in the table!");
+			//throw std::logic_error("SequenceTable<K, T>::insert: Key already present in the table!");
 		}
 	}
 

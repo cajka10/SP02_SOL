@@ -21,7 +21,7 @@ Volby::Volby()
 	this->kVolici = new KriteriumVolici<int, Oblast>();
 	this->kUcast = new KriteriumUcast<double, Oblast>();
 	this->kNachadzaSa = new KriteriumNachadzaSa<bool, Oblast>();
-		
+
 	vypisMenu();
 	std::cout << "ouuuuuuuu!";
 }
@@ -176,7 +176,8 @@ void Volby::vypisMenu()
 	{
 		cout << "----------------------------------------------\n\n" << endl;
 		cout << "1.Nacitaj data \n" << endl;
-		cout << "2.Vypis dediny \n" << endl;
+		cout << "2.Vypis Uzemny celok \n" << endl;
+		cout << "3.Zorad dediny \n" << endl;
 		cout << "0.Ukonci program \n" << endl;
 
 		cout << "----------------------------------------------\n\n" << endl;
@@ -187,6 +188,7 @@ void Volby::vypisMenu()
 		{
 		case 1:nacitajSubory(); break;
 		case 2: vypisPodla(); break;
+		case 3: zoradMenu(); break;
 		case 0: cyklus = false; break;
 		default: std::cout << "zadal si zly znak:"; break;
 
@@ -222,8 +224,8 @@ void Volby::vypisPodla()
 void Volby::vypisPodlaNazvu()
 {
 	string vstup = "";
-	
-	
+
+
 	std::cout << "zadaj Uzemny celok, ktory hladas: \n";
 	cin.ignore();
 	getline(std::cin, vstup);
@@ -264,7 +266,7 @@ void Volby::vypisPodlaNazvu()
 
 		}
 	}
-	
+
 }
 
 void Volby::vypisPodlaVolicov()
@@ -272,7 +274,7 @@ void Volby::vypisPodlaVolicov()
 	int a;
 	int b;
 	int kolo;
-	
+
 	std::cout << " Zadaj interval, pre pocet volicov a v ktorom kole: \n";
 
 	std::cout << "zadaj dolna hranica: \n";
@@ -292,7 +294,7 @@ void Volby::vypisPodlaVolicov()
 		if (filterVolici->evaluate(*item->accessData(), *kVolici))
 		{
 			item->accessData()->vypisInfo();
-		
+
 
 		}
 	}
@@ -303,7 +305,7 @@ void Volby::vypisPodlaVolicov()
 		{
 			item->accessData()->vypisInfo();
 
-		
+
 
 		}
 	}
@@ -313,12 +315,12 @@ void Volby::vypisPodlaVolicov()
 		if (filterVolici->evaluate(*item->accessData(), *kVolici))
 		{
 			item->accessData()->vypisInfo();
-	
+
 
 		}
 	}
 
-	
+
 
 
 }
@@ -328,7 +330,7 @@ void Volby::vypisPodlaUcasti()
 	int a;
 	int b;
 	int kolo;
-	
+
 
 	std::cout << " Zadaj interval, pre pocet volicov a v ktorom kole: \n";
 
@@ -353,7 +355,7 @@ void Volby::vypisPodlaUcasti()
 		{
 			item->accessData()->vypisInfo();
 
-			
+
 		}
 	}
 
@@ -363,7 +365,7 @@ void Volby::vypisPodlaUcasti()
 		if (filterUcast->evaluate(*item->accessData(), *kUcast))
 		{
 			item->accessData()->vypisInfo();
-			
+
 
 		}
 	}
@@ -374,36 +376,64 @@ void Volby::vypisPodlaUcasti()
 		{
 			item->accessData()->vypisInfo();
 
-			
+
 		}
 	}
-
-	
-
 
 }
 
 void Volby::zoradMenu()
 {
 	char rozhodnutie;
-	
-	
-
-	
-
-	
-
-
+	int a, b, kolo;
 	std::cout << "Podla coho chces Zoradit uzemny celok?: \n";
 	cout << "a.Nazov \n" << endl;
 	cout << "b.Volici \n" << endl;
 	cout << "c.Ucast\n" << endl;
 	std::cin >> rozhodnutie;
+
+	structures::UnsortedSequenceTable<string, Oblast*>* pomObce = new structures::UnsortedSequenceTable<string, Oblast*>();
+	std::cout << " Zadaj interval, pre pocet volicov a v ktorom kole: \n";
+
+	std::cout << "zadaj dolna hranica: \n";
+	std::cin >> a;
+	std::cout << "zadaj horna hranica: \n";
+	std::cin >> b;
+	std::cout << "zadaj, pre ktore kolo: \n";
+	std::cin >> kolo;
+	filterUcast->set_alpha(a);
+	filterUcast->set_beta(b);
+	kUcast->set_kolo(kolo);
+
+	for (auto *item : *obce_)
+	{
+		if (filterUcast->evaluate(*item->accessData(), *kUcast))
+		{
+			pomObce->insert(item->accessData()->get_nazov(), item->accessData());
+
+
+		}
+	}
+	structures::HeapSort<string, Oblast*>* heap_sort = new structures::HeapSort<string, Oblast*>();
+
+
+	
+
+
+	
 	switch (rozhodnutie)
 	{
-	case 'a': ; break;
-	case 'b': ; break;
-	case 'c': ; break;
+	case 'a':
+		
+		heap_sort->sort(*pomObce);
+
+		for (auto *item : *pomObce)
+		{
+			item->accessData()->vypisInfo();
+		}; 
+		break;
+	case 'b':; break;
+	case 'c':; break;
 	default: std::cout << "zadal si zly znak"; break;
 	}
 }
@@ -444,7 +474,7 @@ Volby::~Volby()
 	delete kVolici;
 	delete kNachadzaSa;
 	delete kUcast;
-	
+
 
 }
 

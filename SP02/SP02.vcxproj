@@ -119,6 +119,7 @@
     <ClInclude Include="Filter.h" />
     <ClInclude Include="FilterFI.h" />
     <ClInclude Include="Filter_fi.h" />
+    <ClInclude Include="Kluc.h" />
     <ClInclude Include="Obec.h" />
     <ClInclude Include="Kraj.h" />
     <ClInclude Include="Kriterium.h" />

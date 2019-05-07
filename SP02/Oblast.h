@@ -1,12 +1,14 @@
 #pragma once
 #include <string>
 #include <iostream>
+#include "Kluc.h"
 
 class Oblast
 {
 private:
 	std::string nazov_;
 
+	Kluc* kluc;
 	int pocetZapVolicov1_;
 	int pocetVydObalok1_;
 	double ucastVolicovPercenta1_;
@@ -22,9 +24,8 @@ private:
 public:
 
 	Oblast(std::string nazov)
-		: nazov_(nazov)
-
 	{
+		
 	}
 	~Oblast()
 	{
@@ -189,4 +190,5 @@ public:
 	{
 		pocetPlatHlasov2_ = pocet_plat_hlasov2;
 	}
+
 };
