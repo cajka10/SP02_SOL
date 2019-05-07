@@ -221,11 +221,12 @@ void Volby::vypisPodla()
 
 void Volby::vypisPodlaNazvu()
 {
-	string vstup;
+	string vstup = "";
 	
-
+	
 	std::cout << "zadaj Uzemny celok, ktory hladas: \n";
-	std::cin >> vstup;
+	cin.ignore();
+	getline(std::cin, vstup);
 	filterNazov->set_alpha(vstup);
 
 
@@ -434,13 +435,16 @@ Volby::~Volby()
 	}
 	delete okresy_;
 
-	delete kNazov;
 	delete filterNazov;
-	delete kVolici;
 	delete filterNachadzaSa;
 	delete filterUcast;
 	delete filterVolici;
 
+	delete kNazov;
+	delete kVolici;
+	delete kNachadzaSa;
+	delete kUcast;
+	
 
 }
 
