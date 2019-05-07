@@ -410,22 +410,15 @@ void Volby::zoradMenu()
 		if (filterUcast->evaluate(*item->accessData(), *kUcast))
 		{
 			pomObce->insert(item->accessData()->get_nazov(), item->accessData());
-
-
 		}
 	}
-	structures::HeapSort<string, Oblast*>* heap_sort = new structures::HeapSort<string, Oblast*>();
+	structures::HeapSort<string, Oblast*>* hsNazov = new structures::HeapSort<string, Oblast*>();
 
-
-	
-
-
-	
 	switch (rozhodnutie)
 	{
 	case 'a':
 		
-		heap_sort->sort(*pomObce);
+		hsNazov->sort(*pomObce);
 
 		for (auto *item : *pomObce)
 		{
@@ -436,6 +429,8 @@ void Volby::zoradMenu()
 	case 'c':; break;
 	default: std::cout << "zadal si zly znak"; break;
 	}
+	delete hsNazov;
+	delete pomObce;
 }
 
 
