@@ -42,11 +42,41 @@ public:
 	void vypisPodlaVolicov();
 	void vypisPodlaUcasti();
 	void zoradMenu();
+	template<typename L, typename S>
+
+	void skusam(Kriterium<L, S>& kriterium);
+
 
 	
 	
 
 };
+ template <typename L, typename S>
+ void Volby::skusam(Kriterium<L, S>& kriterium)
+ {
+	 structures::HeapSort<L, S*>* heap_sort = new structures::HeapSort<L, S*>();
+	 structures::UnsortedSequenceTable<L, S*>* pomObce = new structures::UnsortedSequenceTable<L, S*>();
+
+	 for (auto *item : *obce_)
+	 {
+		 L kluc;
+		 if (filterUcast->evaluate(*item->accessData(), *kUcast))
+		 {
+			 pomObce->insert(kriterium.evaluate(*item->accessData()), item->accessData());
+
+		 }
+	 }
+	 heap_sort->sort(*pomObce);
+
+	 for (auto *item : *pomObce)
+	 {
+		 item->accessData()->vypisInfo();
+	 }
+	 delete heap_sort;
+	 delete pomObce;
+
+ }
+
 
 
 

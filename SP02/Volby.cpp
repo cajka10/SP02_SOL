@@ -392,7 +392,7 @@ void Volby::zoradMenu()
 	cout << "c.Ucast\n" << endl;
 	std::cin >> rozhodnutie;
 
-	structures::UnsortedSequenceTable<string, Oblast*>* pomObce = new structures::UnsortedSequenceTable<string, Oblast*>();
+	
 	std::cout << " Zadaj interval, pre pocet volicov a v ktorom kole: \n";
 
 	std::cout << "zadaj dolna hranica: \n";
@@ -404,33 +404,16 @@ void Volby::zoradMenu()
 	filterUcast->set_alpha(a);
 	filterUcast->set_beta(b);
 	kUcast->set_kolo(kolo);
-
-	for (auto *item : *obce_)
-	{
-		if (filterUcast->evaluate(*item->accessData(), *kUcast))
-		{
-			pomObce->insert(item->accessData()->get_nazov(), item->accessData());
-		}
-	}
-	structures::HeapSort<string, Oblast*>* hsNazov = new structures::HeapSort<string, Oblast*>();
+	kVolici->set_kolo(kolo);
 
 	switch (rozhodnutie)
 	{
-	case 'a':
-		
-		hsNazov->sort(*pomObce);
-
-		for (auto *item : *pomObce)
-		{
-			item->accessData()->vypisInfo();
-		}; 
-		break;
-	case 'b':; break;
+	case 'a':this->skusam(*kNazov); break;
+	case 'b':this->skusam(*kVolici); break;
 	case 'c':; break;
 	default: std::cout << "zadal si zly znak"; break;
 	}
-	delete hsNazov;
-	delete pomObce;
+	
 }
 
 

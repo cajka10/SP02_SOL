@@ -16,6 +16,7 @@ public:
 	{
 		this->kolo = kolo;
 	}
+	
 private:
 	int kolo;
 };
