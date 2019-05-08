@@ -24,14 +24,14 @@ private:
 	Filter_fi<bool, Oblast>* filterNachadzaSa;
 	Filter_fi<string, Oblast>* filterNazov;
 	FilterFI<int, Oblast>* filterVolici;
-	
+
 
 	KriteriumVolici<int, Oblast>* kVolici;
 	Kriterium<string, Oblast>* kNazov;
 	KriteriumUcast<double, Oblast>* kUcast;
 	KriteriumNachadzaSa<bool, Oblast>* kNachadzaSa;
 
-	
+
 public:
 	Volby();
 	~Volby();
@@ -42,28 +42,56 @@ public:
 	void vypisPodlaVolicov();
 	void vypisPodlaUcasti();
 	void zoradMenu();
-	template<typename L, typename S>
+	template<typename L, typename S, typename O>
 
-	void skusam(Kriterium<L, S>& kriterium);
+	void skusam(Kriterium<O, S>& kriterium);
 
 };
- template <typename L, typename S>
- void Volby::skusam(Kriterium<L, S>& kriterium)
+// L - typ kluca
+// S - typ Objektov v tabulke, a ktore davam do kriteria
+// O - navratovy typ kriteria
+
+template <typename L, typename S, typename O>
+void Volby::skusam(Kriterium<O, S>& kriterium)
+{
+	structures::HeapSort<L, S*, O>* heap_sort = new structures::HeapSort<L, S*, O>();
+	structures::UnsortedSequenceTable<L, S*>* pomObce = new structures::UnsortedSequenceTable<L, S*>();
+
+	for (auto *item : *obce_)
+	{
+		if (filterUcast->evaluate(*item->accessData(), *kUcast))
+		{
+			pomObce->insert(item->accessData()->get_nazov(), item->accessData());
+		}
+	}
+	heap_sort->sort(*pomObce, kriterium);
+	for (auto *item : *pomObce)
+	{
+		item->accessData()->vypisInfo();
+	}
+	delete heap_sort;
+	delete pomObce;
+}
+
+
+
+/*template <typename L, typename S>
+ void Volby::skusam(Kriterium<string, S>& kriterium)
  {
 	 structures::HeapSort<L, S*>* heap_sort = new structures::HeapSort<L, S*>();
 	 structures::UnsortedSequenceTable<L, S*>* pomObce = new structures::UnsortedSequenceTable<L, S*>();
 
 	 for (auto *item : *obce_)
 	 {
-		 L kluc;
+		 L kluc = kriterium.evaluate(*item->accessData());
 		 if (filterUcast->evaluate(*item->accessData(), *kUcast))
 		 {
 
-			 pomObce->insert(kriterium.evaluate(*item->accessData()), item->accessData());
+			 pomObce->insert(kluc, item->accessData());
 
-		 } 
+		 }
 	 }
-	 heap_sort->sort(*pomObce);
+	 heap_sort->sort(*pomObce, );
 
 	 for (auto *item : *pomObce)
 	 {
@@ -72,7 +100,7 @@ public:
 	 delete heap_sort;
 	 delete pomObce;
 
- }
+ }*/
 
 
 

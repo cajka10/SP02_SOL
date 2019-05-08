@@ -158,7 +158,7 @@ void Volby::nacitajSubory()
 		pomOkres->set_ucast_volicov_percenta2(stod(ucast2));
 		pomOkres->set_pocet_odovzd_obalok2(stoi(pocetOdovzObalok2));
 		pomOkres->set_pocet_plat_hlasov2(stoi(pocetPlatHlasov2));
-		okresy_->insert(nazov, pomOkres);
+		okresy_->insert(nazov ,pomOkres);
 
 	}
 
@@ -408,8 +408,8 @@ void Volby::zoradMenu()
 
 	switch (rozhodnutie)
 	{
-	case 'a':this->skusam(*kNazov); break;
-	case 'b':this->skusam(*kVolici); break;
+	case 'a':this->skusam<string, Oblast, string>(*kNazov);
+	case 'b':this->skusam<string, Oblast, int>(*kVolici);
 	case 'c':; break;
 	default: std::cout << "zadal si zly znak"; break;
 	}

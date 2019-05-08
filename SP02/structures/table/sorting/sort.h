@@ -1,6 +1,7 @@
 #pragma once
 
 #include "../unsorted_sequence_table.h"
+#include "../../../Kriterium.h"
 
 namespace structures
 {
@@ -27,7 +28,7 @@ namespace structures
 	/// <summary> Triedenie NonortedSequenceTable navrhnuté ako funkèný objekt. </summary>
 	/// <typeparam name = "K"> Kluc prvkov v tabulke. </typepram>
 	/// <typeparam name = "T"> Typ dat ukladanych v tabulke. </typepram>
-	template <typename K, typename T>
+	template <typename K, typename T, typename O>
 	class Sort
 	{
 	public:
@@ -44,7 +45,7 @@ namespace structures
 
 		/// <summary> Utriedi tabu¾ku. </summary>
 		/// <param name = "table"> NonortedSequenceTable, ktoru ma utriedit. </param>
-		virtual void sort(UnsortedSequenceTable<K, T>& table) = 0;
+		virtual void sort(UnsortedSequenceTable<K, T>& table,  Kriterium<O, T>& kriterium ) = 0;
 
 		/// <summary> Parametricky konstruktor. </summary>
 		/// <param name = "sortNotifier"> Funkcny objekt urceny na notifikaciu pokroku v triediacom algoritme. </param>
@@ -57,32 +58,32 @@ namespace structures
 		SortNotifier* sortNotifier_;
 	};
 
-	template<typename K, typename T>
-	inline Sort<K, T>::Sort():
+	template<typename K, typename T, typename O>
+	inline Sort<K, T, O>::Sort():
 		sortNotifier_(nullptr)
 	{
 	}
 
-	template<typename K, typename T>
-	inline Sort<K, T>::~Sort()
+	template<typename K, typename T, typename O>
+	inline Sort<K, T, O>::~Sort()
 	{
 		sortNotifier_ = nullptr;
 	}
 
-	template<typename K, typename T>
-	inline void Sort<K, T>::operator()(UnsortedSequenceTable<K, T>& table)
+	template<typename K, typename T, typename O>
+	inline void Sort<K, T, O>::operator()(UnsortedSequenceTable<K, T>& table)
 	{
 		sort(table);
 	}
 
-	template<typename K, typename T>
-	inline void Sort<K, T>::setNotifier(SortNotifier * sortNotifier)
+	template<typename K, typename T, typename O>
+	inline void Sort<K, T, O>::setNotifier(SortNotifier * sortNotifier)
 	{
 		sortNotifier_ = sortNotifier;
 	}
 
-	template<typename K, typename T>
-	inline void Sort<K, T>::notify()
+	template<typename K, typename T, typename O>
+	inline void Sort<K, T, O>::notify()
 	{
 		if (sortNotifier_ != nullptr)
 		{

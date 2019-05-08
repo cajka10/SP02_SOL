@@ -20,6 +20,14 @@ public:
 		this->ucast2 = ucast2;
 		this->volici2 = volici2;
 	}
+	Kluc()
+	{
+		
+	}
+	~Kluc()
+	{
+		
+	}
 
 	std::string nazov1() const
 	{
