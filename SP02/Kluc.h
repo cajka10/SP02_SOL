@@ -4,39 +4,24 @@
 class Kluc
 {
 private:
-	int volici;
-	double ucast;
 	std::string nazov;
+	int volici1;
+	double ucast1;
+
+	int volici2;
+	double ucast2;
+
 public:
-
-	Kluc(int volici, double ucast, const std::string& nazov)
-		: volici(volici),
-		  ucast(ucast),
-		  nazov(nazov)
+	Kluc(std::string nazov, int volici1, double ucast1, int volici2, int ucast2)
 	{
+		this->nazov = nazov;
+		this->ucast1 = ucast1;
+		this->volici1 = volici1;
+		this->ucast2 = ucast2;
+		this->volici2 = volici2;
 	}
 
-	int get_volici() const
-	{
-		return volici;
-	}
-
-	void set_volici(int volici)
-	{
-		this->volici = volici;
-	}
-
-	double get_ucast() const
-	{
-		return ucast;
-	}
-
-	void set_ucast(double ucast)
-	{
-		this->ucast = ucast;
-	}
-
-	std::string get_nazov() const
+	std::string nazov1() const
 	{
 		return nazov;
 	}
@@ -44,5 +29,57 @@ public:
 	void set_nazov(const std::string& nazov)
 	{
 		this->nazov = nazov;
+	}
+
+	int get_volici(int kolo) const
+	{
+		if (kolo == 1)
+		{
+			return volici1;
+
+		}
+		else if(kolo == 2) {
+			return  volici2;
+		}
+		else
+		{
+			return volici1 + volici2;
+		}
+	}
+
+	void set_volici1(int volici1)
+	{
+		this->volici1 = volici1;
+	}
+
+	double get_ucast(int kolo) const
+	{
+		if (kolo == 1)
+		{
+			return ucast1;
+
+		}
+		else if (kolo == 2) {
+			return  ucast2;
+		}
+		else
+		{
+			return ucast1 + ucast2;
+		}
+	}
+
+	void set_ucast1(double ucast1)
+	{
+		this->ucast1 = ucast1;
+	}
+
+	void set_volici2(int volici2)
+	{
+		this->volici2 = volici2;
+	}
+
+	void set_ucast2(double ucast2)
+	{
+		this->ucast2 = ucast2;
 	}
 };

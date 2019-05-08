@@ -417,11 +417,6 @@ void Volby::zoradMenu()
 }
 
 
-
-
-
-
-
 Volby::~Volby()
 {
 	for (auto obce : *obce_)

@@ -82,6 +82,8 @@ namespace structures
 		/// <returns> Iterator na koniec struktury. </returns>
 		/// <remarks> Zabezpecuje polymorfizmus. </remarks>
 		Iterator<TableItem<K, T>*>* getEndIterator() const override;
+
+		
 	protected:
 		/// <summary> Konstruktor. </summary>
 		/// <param name = "list"> Zoznam, do ktoreho sa budu ukladat prvky tabulky. </param>

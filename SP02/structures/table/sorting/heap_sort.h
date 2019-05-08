@@ -16,6 +16,7 @@ namespace structures
 		/// <summary> Utriedi tabulku triedenim Heap sort. </summary>
 		/// <param name = "table"> NonortedSequenceTable, ktoru ma utriedit. </param>
 		void sort(UnsortedSequenceTable<K, T>& table) override;
+	
 	};
 
 	template<typename K, typename T>

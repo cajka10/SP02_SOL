@@ -46,10 +46,6 @@ public:
 
 	void skusam(Kriterium<L, S>& kriterium);
 
-
-	
-	
-
 };
  template <typename L, typename S>
  void Volby::skusam(Kriterium<L, S>& kriterium)
@@ -62,9 +58,10 @@ public:
 		 L kluc;
 		 if (filterUcast->evaluate(*item->accessData(), *kUcast))
 		 {
+
 			 pomObce->insert(kriterium.evaluate(*item->accessData()), item->accessData());
 
-		 }
+		 } 
 	 }
 	 heap_sort->sort(*pomObce);
 
