@@ -18,9 +18,9 @@ Volby::Volby()
 	this->filterVolici = new FilterFI<int, Oblast>();
 
 	this->kNazov = new KriteriumNazov<string, Oblast>();
-	this->kVolici = new KriteriumVolici<int, Oblast>();
-	this->kUcast = new KriteriumUcast<double, Oblast>();
-	this->kNachadzaSa = new KriteriumNachadzaSa<bool, Oblast>();
+	this->kVolici = new KriteriumVolici<int, Oblast*>();
+	this->kUcast = new KriteriumUcast<double, Oblast*>();
+	this->kNachadzaSa = new KriteriumNachadzaSa<bool, Oblast*>();
 
 	vypisMenu();
 	std::cout << "ouuuuuuuu!";
@@ -384,6 +384,16 @@ void Volby::vypisPodlaUcasti()
 
 void Volby::zoradMenu()
 {
+	
+	structures::UnsortedSequenceTable<string, Oblast*>* pomObce = new structures::UnsortedSequenceTable<string, Oblast*>();
+	for (auto *item : *obce_)
+	{
+		if (filterUcast->evaluate(*item->accessData(), *kUcast))
+		{
+			pomObce->insert(item->accessData()->get_nazov(), item->accessData());
+		}
+	}
+
 	char rozhodnutie;
 	int a, b, kolo;
 	std::cout << "Podla coho chces Zoradit uzemny celok?: \n";
@@ -406,14 +416,32 @@ void Volby::zoradMenu()
 	kUcast->set_kolo(kolo);
 	kVolici->set_kolo(kolo);
 
-	switch (rozhodnutie)
+	if (rozhodnutie == 'a')
 	{
-	case 'a':this->skusam<string, Oblast, string>(*kNazov);
-	case 'b':this->skusam<string, Oblast, int>(*kVolici);
-	case 'c':; break;
-	default: std::cout << "zadal si zly znak"; break;
+		structures::HeapSort<string, Oblast*, string>* heap_sort = new structures::HeapSort<string, Oblast*, string>();
+				
+		heap_sort->sort(*pomObce, *kNazov);		
 	}
-	
+	if (rozhodnutie == 'b')
+	{
+		structures::HeapSort<string, Oblast*, int>* heap_sort = new structures::HeapSort<string, Oblast*, int>();
+		
+
+		heap_sort->sort(*pomObce, *kVolici);
+		
+	}
+	if (rozhodnutie == 'c')
+	{
+		structures::HeapSort<string, Oblast*, double>* heap_sort = new structures::HeapSort<string, Oblast*, double>();
+		
+
+		heap_sort->sort(*pomObce, *kUcast);
+		
+	}
+	for (auto item : *pomObce)
+	{
+		item->accessData()->vypisInfo();
+	}
 }
 
 

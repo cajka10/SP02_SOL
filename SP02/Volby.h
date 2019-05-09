@@ -26,10 +26,10 @@ private:
 	FilterFI<int, Oblast>* filterVolici;
 
 
-	KriteriumVolici<int, Oblast>* kVolici;
+	KriteriumVolici<int, Oblast*>* kVolici;
 	Kriterium<string, Oblast>* kNazov;
-	KriteriumUcast<double, Oblast>* kUcast;
-	KriteriumNachadzaSa<bool, Oblast>* kNachadzaSa;
+	KriteriumUcast<double, Oblast*>* kUcast;
+	KriteriumNachadzaSa<bool, Oblast*>* kNachadzaSa;
 
 
 public:
@@ -44,30 +44,32 @@ public:
 	void zoradMenu();
 	template<typename L, typename S, typename O>
 
-	void skusam(Kriterium<O, S>& kriterium);
+	void zotriedPodla( Kriterium<O,  S>& kriterium);
 
 };
 // L - typ kluca
 // S - typ Objektov v tabulke, a ktore davam do kriteria
 // O - navratovy typ kriteria
-
+/*
 template <typename L, typename S, typename O>
-void Volby::skusam(Kriterium<O, S>& kriterium)
+void Volby::zotriedPodla( Kriterium<O, S>& kriterium )
 {
-	structures::HeapSort<L, S*, O>* heap_sort = new structures::HeapSort<L, S*, O>();
-	structures::UnsortedSequenceTable<L, S*>* pomObce = new structures::UnsortedSequenceTable<L, S*>();
+	structures::HeapSort<L, S, O>* heap_sort = new structures::HeapSort<L, S, O>();
+	structures::UnsortedSequenceTable<L, S>* pomObce = new structures::UnsortedSequenceTable<L, S>();
 
-	for (auto *item : *obce_)
+	for (auto item : *obce_)
 	{
 		if (filterUcast->evaluate(*item->accessData(), *kUcast))
 		{
-			pomObce->insert(item->accessData()->get_nazov(), item->accessData());
+			pomObce->insert(item->accessData()->get_nazov(), *item->accessData());
 		}
 	}
 	heap_sort->sort(*pomObce, kriterium);
-	for (auto *item : *pomObce)
+
+	for (auto item : *pomObce)
 	{
-		item->accessData()->vypisInfo();
+		Oblast* obec = reinterpret_cast<Oblast*>(*item->accessData());
+		obec->vypisInfo();
 	}
 	delete heap_sort;
 	delete pomObce;
@@ -75,8 +77,8 @@ void Volby::skusam(Kriterium<O, S>& kriterium)
 
 
 
-/*template <typename L, typename S>
- void Volby::skusam(Kriterium<string, S>& kriterium)
+template <typename L, typename S>
+ void Volby::zotriedPodla(Kriterium<string, S>& kriterium)
  {
 	 structures::HeapSort<L, S*>* heap_sort = new structures::HeapSort<L, S*>();
 	 structures::UnsortedSequenceTable<L, S*>* pomObce = new structures::UnsortedSequenceTable<L, S*>();
