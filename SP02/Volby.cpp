@@ -18,9 +18,9 @@ Volby::Volby()
 	this->filterVolici = new FilterFI<int, Oblast>();
 
 	this->kNazov = new KriteriumNazov<string, Oblast>();
-	this->kVolici = new KriteriumVolici<int, Oblast*>();
-	this->kUcast = new KriteriumUcast<double, Oblast*>();
-	this->kNachadzaSa = new KriteriumNachadzaSa<bool, Oblast*>();
+	this->kVolici = new KriteriumVolici<int, Oblast>();
+	this->kUcast = new KriteriumUcast<double, Oblast>();
+	this->kNachadzaSa = new KriteriumNachadzaSa<bool, Oblast>();
 
 	vypisMenu();
 	std::cout << "ouuuuuuuu!";
@@ -319,7 +319,7 @@ void Volby::vypisPodlaVolicov()
 
 		}
 	}
-
+	
 
 
 
@@ -403,7 +403,7 @@ void Volby::zoradMenu()
 	std::cin >> rozhodnutie;
 
 	
-	std::cout << " Zadaj interval, pre pocet volicov a v ktorom kole: \n";
+	std::cout << " Zadaj interval, pre ucast volicov a v ktorom kole:(Filter ucast) \n";
 
 	std::cout << "zadaj dolna hranica: \n";
 	std::cin >> a;
@@ -413,35 +413,43 @@ void Volby::zoradMenu()
 	std::cin >> kolo;
 	filterUcast->set_alpha(a);
 	filterUcast->set_beta(b);
+
 	kUcast->set_kolo(kolo);
 	kVolici->set_kolo(kolo);
+	
 
 	if (rozhodnutie == 'a')
 	{
-		structures::HeapSort<string, Oblast*, string>* heap_sort = new structures::HeapSort<string, Oblast*, string>();
+		structures::HeapSort<string, Oblast*, string, Oblast>* heap_sort = new structures::HeapSort<string, Oblast*, string, Oblast>();
 				
-		heap_sort->sort(*pomObce, *kNazov);		
+		heap_sort->sort(*pomObce, *kNazov );
+		delete heap_sort;
+
 	}
 	if (rozhodnutie == 'b')
 	{
-		structures::HeapSort<string, Oblast*, int>* heap_sort = new structures::HeapSort<string, Oblast*, int>();
-		
+		structures::HeapSort<string, Oblast*, int, Oblast>* heap_sort = new structures::HeapSort<string, Oblast*, int, Oblast>();
 
 		heap_sort->sort(*pomObce, *kVolici);
-		
+		delete heap_sort;
+
 	}
 	if (rozhodnutie == 'c')
 	{
-		structures::HeapSort<string, Oblast*, double>* heap_sort = new structures::HeapSort<string, Oblast*, double>();
+		structures::HeapSort<string, Oblast*, double, Oblast>* heap_sort = new structures::HeapSort<string, Oblast*, double, Oblast>();
+
 		
 
 		heap_sort->sort(*pomObce, *kUcast);
-		
+		delete heap_sort;
+
 	}
 	for (auto item : *pomObce)
 	{
-		item->accessData()->vypisInfo();
+		item->accessData()->vypisInfoKolo(kolo);
 	}
+
+	delete pomObce;
 }
 
 

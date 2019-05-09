@@ -10,18 +10,18 @@ namespace structures
 	/// <typeparam name = "K"> Kluc prvkov v tabulke. </typepram>
 	/// <typeparam name = "T"> Typ dat ukladanych v tabulke. </typepram>
 	/// <typeparam name = "O"> Typ dat navratenych z kriteria, podla ktorych sa triedi. </typepram>
-	template <typename K, typename T, typename O>
-	class HeapSort : public Sort<K, T, O>
+	template<typename K, typename T, typename O, typename S>
+	class HeapSort : public Sort<K, T, O, S>
 	{
 	public:
 		/// <summary> Utriedi tabulku triedenim Heap sort. </summary>
 		/// <param name = "table"> NonortedSequenceTable, ktoru ma utriedit. </param>
-		void sort(UnsortedSequenceTable<K, T>& table, Kriterium<O, T>& kriterium ) override;
-	
+		void sort(UnsortedSequenceTable<K, T>& table, Kriterium<O, S>& kriterium ) override;
+		
 	};
 	
-	template<typename K, typename T, typename O>
-	inline void HeapSort<K, T, O>::sort(UnsortedSequenceTable<K, T>& table, Kriterium<O, T>& kriterium )
+	template<typename K, typename T, typename O, typename S>
+	inline void HeapSort<K, T, O ,S>::sort(UnsortedSequenceTable<K, T>& table, Kriterium<O, S >& kriterium )
 	{
 		bool swapping;
 		for (int i = 1; i < table.size(); i++) {
@@ -29,7 +29,7 @@ namespace structures
 			do {
 				swapping = false;
 				int father = (current - 1) / 2;
-				if ((current > 0) && (kriterium.evaluate(table.getItemAtIndex(current).accessData() )> kriterium.evaluate(table.getItemAtIndex(parent).accessData()))) {
+				if ((current > 0) && (kriterium.evaluate(*table.getItemAtIndex(current).accessData() )> kriterium.evaluate(*table.getItemAtIndex(father).accessData()))) {
 					table.swap(current, father);
 					current = father;
 					swapping = true;
@@ -45,10 +45,10 @@ namespace structures
 				int left = current * 2 + 1;
 				int right = current * 2 + 2;
 				if (left < i && right < i)
-					max = kriterium.evaluate(table.getItemAtIndex(left).accessData()) > kriterium.evaluate(table.getItemAtIndex(right).accessData().getKey()) ? left : right;
+					max = kriterium.evaluate(*table.getItemAtIndex(left).accessData()) > kriterium.evaluate(*table.getItemAtIndex(right).accessData()) ? left : right;
 				else
 					max = left < i ? left : right;
-				if (max < i && kriterium.evaluate(table.getItemAtIndex(max).accessData()) > kriterium.evaluate(table.getItemAtIndex(current).accessData())) {
+				if (max < i && kriterium.evaluate(*table.getItemAtIndex(max).accessData()) > kriterium.evaluate(*table.getItemAtIndex(current).accessData())) {
 					table.swap(max, current);
 					current = max;
 					swapping = true;

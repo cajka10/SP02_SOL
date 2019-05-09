@@ -26,10 +26,10 @@ private:
 	FilterFI<int, Oblast>* filterVolici;
 
 
-	KriteriumVolici<int, Oblast*>* kVolici;
+	KriteriumVolici<int, Oblast>* kVolici;
 	Kriterium<string, Oblast>* kNazov;
-	KriteriumUcast<double, Oblast*>* kUcast;
-	KriteriumNachadzaSa<bool, Oblast*>* kNachadzaSa;
+	KriteriumUcast<double, Oblast>* kUcast;
+	KriteriumNachadzaSa<bool, Oblast>* kNachadzaSa;
 
 
 public:

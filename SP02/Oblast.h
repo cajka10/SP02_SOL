@@ -46,6 +46,34 @@ public:
 
 		std::cout << "-------------------------------------------------------------\n";
 	}
+	void vypisInfoKolo(int kolo) {
+		if (kolo == 1)
+		{
+
+
+			std::cout << "-------------------------------------------------------------\n";
+			std::cout << this->get_nazov() << "\n";
+			std::cout << "1.Kolo: \n";
+			std::cout << "Volici:" << this->get_pocet_zap_volicov(1) << "\n";
+			std::cout << "Vydane Obalky:" << this->get_pocet_vyd_obalok(1) << "\n";
+			std::cout << "Ucast:" << this->get_ucast_volicov_percenta(1) << "\n";
+			std::cout << "Odovzdane Obalky:" << this->get_pocet_odovzd_obalok(1) << "\n";
+
+
+			std::cout << "-------------------------------------------------------------\n";
+		}
+		else if (kolo == 2)
+		{
+			std::cout << "-------------------------------------------------------------\n";
+			std::cout << "2.Kolo: \n";
+			std::cout << "Volici:" << this->get_pocet_zap_volicov(2) << "\n";
+			std::cout << "Vydane Obalky:" << this->get_pocet_vyd_obalok(2) << "\n";
+			std::cout << "Ucast:" << this->get_ucast_volicov_percenta(2) << "\n";
+			std::cout << "Odovzdane Obalky:" << this->get_pocet_odovzd_obalok(2) << "\n";
+			std::cout << "-------------------------------------------------------------\n";
+		}
+		
+	}
 
 	std::string get_nazov() const
 	{
