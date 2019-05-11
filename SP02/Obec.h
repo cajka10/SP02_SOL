@@ -1,11 +1,13 @@
 #pragma once
 #include <string>
+#include "Volby.h"
 #include "Oblast.h"
 using namespace  std;
 class Obec : public Oblast
 {
 private:
 	string nazovOkresu_;
+	string nazovKraju_;
 
 public:
 	Obec(string nazov);
@@ -20,5 +22,15 @@ public:
 	void set_nazov_okresu(const string& nazov_okresu)
 	{
 		nazovOkresu_ = nazov_okresu;
+	}
+
+	string get_nazov_kraju() const
+	{
+		return nazovKraju_;
+	}
+
+	void set_nazov_kraju(const string& nazov_kraju)
+	{
+		this->nazovKraju_ = nazov_kraju;
 	}
 };

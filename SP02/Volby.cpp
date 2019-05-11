@@ -28,7 +28,7 @@ Volby::Volby()
 void Volby::nacitajSubory()
 {
 
-	ifstream is("dediny_skrajmi.csv");
+	ifstream is("dediny_vstup.csv");
 
 	if (!is.is_open())
 	{
@@ -47,6 +47,7 @@ void Volby::nacitajSubory()
 	string pocetOdovzObalok2;
 	string pocetPlatHlasov2;
 	string nazovOkresu;
+	string nazovKraju;
 
 	while (is.good())
 	{
@@ -62,7 +63,8 @@ void Volby::nacitajSubory()
 		getline(is, ucast2, ';');
 		getline(is, pocetOdovzObalok2, ';');
 		getline(is, pocetPlatHlasov2, ';');
-		getline(is, nazovOkresu, '\n');
+		getline(is, nazovOkresu, ';');
+		getline(is, nazovKraju, '\n');
 
 		Obec* pomDedina = new Obec(nazov);
 		pomDedina->set_pocet_zap_volicov1(stoi(pocetZapVolicov1));
@@ -77,6 +79,7 @@ void Volby::nacitajSubory()
 		pomDedina->set_pocet_odovzd_obalok2(stoi(pocetOdovzObalok2));
 		pomDedina->set_pocet_plat_hlasov2(stoi(pocetPlatHlasov2));
 		pomDedina->set_nazov_okresu(nazovOkresu);
+		pomDedina->set_nazov_kraju(nazovKraju);
 		obce_->insert(nazov, pomDedina);
 
 
@@ -125,7 +128,7 @@ void Volby::nacitajSubory()
 
 	is.clear();
 
-	is.open("okresy.csv");
+	is.open("okresy_vstup.csv");
 	if (!is.is_open())
 	{
 		std::cout << "Error: File Open" << "\n";
@@ -144,7 +147,9 @@ void Volby::nacitajSubory()
 		getline(is, pocetVydObalok2, ';');
 		getline(is, ucast2, ';');
 		getline(is, pocetOdovzObalok2, ';');
-		getline(is, pocetPlatHlasov2, '\n');
+		getline(is, pocetPlatHlasov2, ';');
+		getline(is, nazovKraju, '\n');
+
 
 		Okres* pomOkres = new Okres(nazov);
 		pomOkres->set_pocet_zap_volicov1(stoi(pocetZapVolicov1));
@@ -158,6 +163,7 @@ void Volby::nacitajSubory()
 		pomOkres->set_ucast_volicov_percenta2(stod(ucast2));
 		pomOkres->set_pocet_odovzd_obalok2(stoi(pocetOdovzObalok2));
 		pomOkres->set_pocet_plat_hlasov2(stoi(pocetPlatHlasov2));
+		pomOkres->set_nazov_kraju(nazovKraju);
 		okresy_->insert(nazov ,pomOkres);
 
 	}
@@ -174,13 +180,15 @@ void Volby::vypisMenu()
 	bool cyklus = true;
 	while (cyklus)
 	{
-		cout << "----------------------------------------------\n\n" << endl;
+		std::cout << "-------------------------------------------------------------\n";
+
 		cout << "1.Nacitaj data \n" << endl;
 		cout << "2.Vypis Uzemny celok \n" << endl;
 		cout << "3.Zorad dediny \n" << endl;
 		cout << "0.Ukonci program \n" << endl;
 
-		cout << "----------------------------------------------\n\n" << endl;
+		std::cout << "-------------------------------------------------------------\n\n";
+
 
 
 		cin >> c;
@@ -235,9 +243,16 @@ void Volby::vypisPodlaNazvu()
 	if (obce_->containsKey(vstup))
 	{
 		std::cout << "Obec\n";
+		std::cout << "-------------------------------------------------------------\n";
 
 		if (filterNazov->evaluate(*obce_->operator[](vstup), *kNazov)) {
 			obce_->operator[](vstup)->vypisInfo();
+			
+			cout << obce_->operator[](vstup)->get_nazov_okresu() << endl;
+
+			cout << obce_->operator[](vstup)->get_nazov_kraju() << endl;
+			std::cout << "-------------------------------------------------------------\n";
+
 
 		}
 
@@ -247,24 +262,31 @@ void Volby::vypisPodlaNazvu()
 	if (okresy_->containsKey(vstup))
 	{
 		std::cout << "Okres\n";
+		std::cout << "-------------------------------------------------------------\n";
 
 		if (filterNazov->evaluate(*okresy_->operator[](vstup), *kNazov)) {
 			okresy_->operator[](vstup)->vypisInfo();
+			std::cout << okresy_->operator[](vstup)->get_nazov_kraju();
 
+			std::cout << "-------------------------------------------------------------\n";
 
 		}
+
 	}
 
 
 	if (kraje_->containsKey(vstup))
 	{
 		std::cout << "Kraj:\n";
+		std::cout << "-------------------------------------------------------------\n";
 
 		if (filterNazov->evaluate(*kraje_->operator[](vstup), *kNazov)) {
 			kraje_->operator[](vstup)->vypisInfo();
+			std::cout << "-------------------------------------------------------------\n";
 
 
 		}
+
 	}
 
 }
@@ -286,38 +308,56 @@ void Volby::vypisPodlaVolicov()
 	filterVolici->set_alpha(a);
 	filterVolici->set_beta(b);
 	kVolici->set_kolo(kolo);
-	std::cout << "Obec\n";
 
 	for (auto *item : *obce_)
 	{
-
+		
 		if (filterVolici->evaluate(*item->accessData(), *kVolici))
 		{
+			std::cout << "Obec\n";
+
+			std::cout << "-------------------------------------------------------------\n";
+
 			item->accessData()->vypisInfo();
-
-
+			std::cout << item->accessData()->get_nazov_okresu() << endl;
+			std::cout << item->accessData()->get_nazov_kraju() << endl;
+			
+			std::cout << "-------------------------------------------------------------\n";
 		}
+		
+
 	}
 	for (auto *item : *okresy_)
 	{
+		
 
 		if (filterVolici->evaluate(*item->accessData(), *kVolici))
 		{
+			std::cout << "Okres:\n";
+
+			std::cout << "-------------------------------------------------------------\n";
 			item->accessData()->vypisInfo();
+			std::cout << item->accessData()->get_nazov_kraju() << endl;
 
-
+			std::cout << "-------------------------------------------------------------\n";
 
 		}
+
 	}
 	for (auto *item : *kraje_)
 	{
+		
 
 		if (filterVolici->evaluate(*item->accessData(), *kVolici))
 		{
-			item->accessData()->vypisInfo();
+			std::cout << "Kraj:\n";
 
+			std::cout << "-------------------------------------------------------------\n";
+			item->accessData()->vypisInfo();
+			std::cout << "-------------------------------------------------------------\n";
 
 		}
+
 	}
 	
 
@@ -344,40 +384,57 @@ void Volby::vypisPodlaUcasti()
 	filterUcast->set_beta(b);
 	kUcast->set_kolo(kolo);
 
-	std::cout << "Obec\n";
 
 
 	for (auto *item : *obce_)
 	{
-
+		
 
 		if (filterUcast->evaluate(*item->accessData(), *kUcast))
 		{
-			item->accessData()->vypisInfo();
+			std::cout << "Obec\n";
 
+			std::cout << "-------------------------------------------------------------\n";
+			item->accessData()->vypisInfo();
+			std::cout << item->accessData()->get_nazov_okresu() << endl;
+			std::cout << item->accessData()->get_nazov_kraju() << endl;
+			std::cout << "-------------------------------------------------------------\n";
 
 		}
+
 	}
 
 	for (auto *item : *okresy_)
 	{
+		
 
 		if (filterUcast->evaluate(*item->accessData(), *kUcast))
 		{
-			item->accessData()->vypisInfo();
+			std::cout << "Okres\n";
 
+			std::cout << "-------------------------------------------------------------\n";
+			item->accessData()->vypisInfo();
+			std::cout << item->accessData()->get_nazov_kraju() << endl;
+
+			std::cout << "-------------------------------------------------------------\n";
 
 		}
+
 	}
 	for (auto *item : *kraje_)
 	{
+		
 
 		if (filterUcast->evaluate(*item->accessData(), *kUcast))
 		{
-			item->accessData()->vypisInfo();
+			std::cout << "Kraj\n";
 
+			std::cout << "-------------------------------------------------------------\n";
+			item->accessData()->vypisInfo();
+			std::cout << "-------------------------------------------------------------\n";
 
 		}
+
 	}
 
 }
